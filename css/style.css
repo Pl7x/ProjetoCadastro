@@ -1,0 +1,147 @@
+/* RESET */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #eef1f5;
+    display: flex;
+    justify-content: center;
+    padding: 8px;
+}
+
+/* REMOVE CENTER */
+center {
+    display: contents;
+}
+
+/* FORM */
+form[name="matricula"] {
+    background: #ffffff;
+    padding: 12px;
+    border-radius: 8px;
+    max-width: 980px;
+    width: 100%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* TABLE */
+table {
+    width: 100%;
+}
+
+/* TÍTULOS */
+th {
+    background: #4a6fa5;
+    color: white;
+    padding: 5px 10px;
+    font-size: 0.9em;
+    border-radius: 4px;
+    margin: 6px 0 3px;
+    display: block;
+}
+
+/* LINHAS */
+td {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 2px 0;
+    align-items: center;
+}
+
+/* INPUTS */
+input,
+select {
+    padding: 4px 6px;
+    font-size: 12px;
+    border: 1px solid #ccd2d8;
+    border-radius: 4px;
+    background: #fafafa;
+}
+
+/* FOCO */
+input:focus,
+select:focus {
+    border-color: #4a6fa5;
+    background: #fff;
+    box-shadow: 0 0 0 1px rgba(74,111,165,0.2);
+}
+
+/* RADIO E CHECK */
+input[type="radio"],
+input[type="checkbox"] {
+    transform: scale(0.8);
+    margin: 0 2px;
+}
+
+/* LABELS (Sexo, Tipo etc) */
+strong {
+    font-size: 0.85em;
+    margin-right: 4px;
+    color: #444;
+}
+
+/* CURSO */
+td.curso {
+    background: #f6f8fa;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #e1e5ea;
+}
+
+.curso {
+    gap: 5px;
+}
+
+.curso div {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.curso label {
+    font-size: 10px;
+    color: #666;
+}
+
+/* BOTÕES */
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 10px;
+    padding-top: 6px;
+    border-top: 1px solid #eee;
+}
+
+input[type="submit"],
+input[type="reset"] {
+    padding: 6px 16px;
+    font-size: 12px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+}
+
+/* CORES BOTÕES */
+input[type="submit"] {
+    background: #28a745;
+    color: #fff;
+}
+
+input[type="submit"]:hover {
+    background: #218838;
+}
+
+input[type="reset"] {
+    background: #dc3545;
+    color: #fff;
+}
+
+input[type="reset"]:hover {
+    background: #c82333;
+}

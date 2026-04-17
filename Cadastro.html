@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Formulário</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<form name="matricula">
+
+<table>
+
+<tr><th>Dados do Aluno</th></tr>
+
+<tr>
+<td><input type="text" placeholder="Nome:" style="width:100%"></td>
+</tr>
+
+<tr>
+<td>
+<input type="text" placeholder="Endereço:" style="width:70%">
+<input type="text" placeholder="Complemento:" style="width:28%">
+</td>
+</tr>
+
+<tr>
+<td>
+<input type="text" placeholder="Cidade:" style="width:15%">
+<input type="text" placeholder="Bairro:" style="width:15%">
+<input type="text" placeholder="CEP:" style="width:12%" maxlength="9" oninput="mascaraCEP(this)">
+<input type="text" placeholder="Estado:" style="width:8%">
+<input type="date">
+</td>
+</tr>
+
+<tr>
+<td>
+<input type="text" placeholder="Profissão:" style="width:30%">
+<input type="email" placeholder="Email:" style="width:25%">
+<input type="text" placeholder="Whatsapp:" style="width:15%" maxlength="15" oninput="mascaraTelefone(this)">
+</td>
+</tr>
+
+<tr>
+<td>
+<input type="text" placeholder="Escolaridade:" style="width:30%">
+Sexo:
+Masc <input type="radio" name="sexo">
+Fem <input type="radio" name="sexo">
+<input type="text" placeholder="RG:" style="width:10%" maxlength="12" oninput="mascaraRG(this)">
+<input type="text" placeholder="Telefone Comercial:" style="width:15%" maxlength="15" oninput="mascaraTelefone(this)">
+</td>
+</tr>
+
+<tr>
+<td>
+<input type="text" placeholder="Medicação:" style="width:30%">
+
+<select>
+<option>Estado Civil</option>
+<option>Solteiro(a)</option>
+<option>Casado(a)</option>
+<option>Divorciado(a)</option>
+<option>Viúvo(a)</option>
+<option>União Estável</option>
+</select>
+
+<input type="text" placeholder="CPF:" style="width:15%" maxlength="14" oninput="mascaraCPF(this)">
+</td>
+</tr>
+
+<tr><th>Responsável Financeiro</th></tr>
+
+<tr>
+<td><input type="text" placeholder="Nome:" style="width:100%"></td>
+</tr>
+
+<tr>
+<td>
+<input type="text" placeholder="Endereço:" style="width:70%">
+<input type="text" placeholder="Complemento:" style="width:28%">
+</td>
+</tr>
+
+<tr>
+<td>
+<input type="text" placeholder="Cidade:" style="width:15%">
+<input type="text" placeholder="Bairro:" style="width:15%">
+<input type="text" placeholder="CEP:" style="width:12%" maxlength="9" oninput="mascaraCEP(this)">
+<input type="text" placeholder="Estado:" style="width:8%">
+<input type="date">
+</td>
+</tr>
+
+<tr>
+<td>
+<input type="text" placeholder="Profissão:" style="width:30%">
+<input type="email" placeholder="Email:" style="width:25%">
+<input type="text" placeholder="Telefone Residencial:" style="width:15%" maxlength="15" oninput="mascaraTelefone(this)">
+</td>
+</tr>
+
+<tr>
+<td>
+<input type="text" placeholder="Escolaridade:" style="width:30%">
+Sexo:
+Masc <input type="radio" name="sexo2">
+Fem <input type="radio" name="sexo2">
+<input type="text" placeholder="RG:" style="width:10%" maxlength="12" oninput="mascaraRG(this)">
+<input type="text" placeholder="Telefone Comercial:" style="width:15%" maxlength="15" oninput="mascaraTelefone(this)">
+</td>
+</tr>
+
+<tr>
+<td>
+<input type="text" placeholder="CPF/CNPJ:" style="width:30%" maxlength="14" oninput="mascaraCPF(this)">
+
+<select>
+<option>Estado Civil</option>
+<option>Solteiro(a)</option>
+<option>Casado(a)</option>
+<option>Divorciado(a)</option>
+<option>Viúvo(a)</option>
+<option>União Estável</option>
+</select>
+
+<input type="text" placeholder="Cargo:" style="width:15%">
+</td>
+</tr>
+
+<tr>
+<td>
+<strong>Tipo de Pessoa:</strong>
+Física <input type="radio" name="Pessoa">
+Jurídica <input type="radio" name="Pessoa">
+</td>
+</tr>
+
+<tr><th>Investimento Educacional</th></tr>
+
+<tr>
+<td>
+<input type="text" placeholder="Taxa de Matrícula:" style="width:15%">
+<input type="text" placeholder="Taxa do Material WEB:" style="width:25%">
+<input type="text" placeholder="Valor das Parcelas:" style="width:15%">
+<input type="text" placeholder="Número de Parcelas:" style="width:15%">
+</td>
+</tr>
+
+<tr>
+<td>
+<strong>Vencimento:</strong>
+<input type="radio" name="Vencimento">10
+<input type="radio" name="Vencimento">20
+
+<input type="text" placeholder="Duração do Curso:" style="width:20%">
+</td>
+</tr>
+
+<tr><th>Dados do Curso</th></tr>
+
+<tr>
+<td class="curso">
+
+<div>
+<label>Curso</label>
+<input type="text">
+</div>
+
+<div>
+<label>Turma</label>
+<input type="text">
+</div>
+
+<div>
+<label>Turno</label>
+<select>
+<option>Selecione</option>
+<option>Manhã</option>
+<option>Tarde</option>
+<option>Noite</option>
+</select>
+</div>
+
+<div>
+<label>Início</label>
+<input type="date">
+</div>
+
+<div>
+<label>Término</label>
+<input type="date">
+</div>
+
+<div>
+<label>Carga Horária</label>
+<input type="text">
+</div>
+
+<div>
+<label>Sala</label>
+<input type="text">
+</div>
+
+</td>
+</tr>
+
+<tr>
+<td>
+<strong>Dias:</strong>
+<input type="checkbox">Seg
+<input type="checkbox">Ter
+<input type="checkbox">Qua
+<input type="checkbox">Qui
+<input type="checkbox">Sex
+<input type="checkbox">Sab
+
+<strong>Horário:</strong>
+<input type="time"> às <input type="time">
+</td>
+</tr>
+
+<tr>
+<td>
+<input type="text" placeholder="Ass. Primeira Aula:" style="width:100%">
+</td>
+</tr>
+
+<tr>
+<td>
+<input type="text" placeholder="Contratante" style="width:25%">
+<input type="text" placeholder="Contratada" style="width:25%">
+<input type="date">
+</td>
+</tr>
+
+</table>
+
+<div class="buttons">
+<input type="submit" value="Enviar">
+<input type="reset" value="Limpar">
+</div>
+
+</form>
+
+<!-- SCRIPT DAS MÁSCARAS -->
+<script src="JS/script.js"></script>
+
+</body>
+</html>

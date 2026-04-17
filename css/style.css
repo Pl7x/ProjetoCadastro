@@ -1,165 +1,188 @@
-/* RESET */
+/* =========================================
+   Reset Básico
+   ========================================= */
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* BODY CENTRALIZADO */
 body {
-    font-family: 'Segoe UI', sans-serif;
-    background: #eef1f5;
+    background-color: #e9ecef;
+    color: #333;
+    padding: 20px;
     display: flex;
     justify-content: center;
-    padding: 8px;
 }
 
-/* REMOVE <center> */
-center {
-    display: contents;
-}
-
-/* FORM */
-form[name="matricula"] {
-    background: #fff;
+/* =========================================
+   Container Principal do Formulário
+   ========================================= */
+.form-moderno {
+    background-color: #ffffff;
     width: 100%;
     max-width: 950px;
-    padding: 12px;
     border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 30px;
 }
 
-/* TABLE */
-table {
-    width: 100%;
-    border-collapse: collapse;
+.sessao {
+    margin-bottom: 25px;
 }
 
-/* TÍTULOS */
-th {
-    display: block;
-    background: #3f5f8f;
-    color: #fff;
-    font-size: 13px;
-    padding: 5px 8px;
+.titulo-sessao {
+    background-color: #0056b3;
+    color: #ffffff;
+    padding: 10px 15px;
+    font-size: 1.05em;
+    font-weight: 600;
     border-radius: 4px;
-    margin: 6px 0 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 15px;
 }
 
-/* LINHAS */
-td {
+/* =========================================
+   Sistema de Linhas (Flexbox)
+   ========================================= */
+.linha {
     display: flex;
+    gap: 12px; /* Espaço uniforme entre os campos */
+    margin-bottom: 12px; /* Espaço uniforme entre as linhas */
+    align-items: center;
+    width: 100%;
+}
+
+.alinha-topo {
+    align-items: flex-start;
+}
+
+/* Empurra os itens para as extremidades (Usado na linha de Dias e Horário) */
+.alinhar-cantos {
+    justify-content: space-between; 
+}
+
+/* =========================================
+   Inputs Globais
+   ========================================= */
+input[type="text"],
+input[type="email"],
+input[type="date"],
+input[type="time"],
+select {
+    padding: 9px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    background-color: #fdfdfd;
+    color: #495057;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+    width: 100%; /* Ocupa todo o espaço do Flexbox */
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="date"]:focus,
+input[type="time"]:focus,
+select:focus {
+    border-color: #80bdff;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+    background-color: #fff;
+}
+
+/* =========================================
+   Radios e Checkboxes
+   ========================================= */
+.opcoes-inline {
+    display: flex;
+    align-items: center;
+    gap: 12px;
     flex-wrap: wrap;
+    background: #f8f9fa;
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid #e9ecef;
+}
+
+.opcoes-inline strong {
+    color: #0056b3;
+    font-size: 0.9em;
+}
+
+.opcoes-inline label {
+    display: flex;
     align-items: center;
     gap: 5px;
-    padding: 2px 0;
-}
-
-/* INPUTS */
-input,
-select {
-    padding: 4px 6px;
-    font-size: 12px;
-    border: 1px solid #ccd2d8;
-    border-radius: 4px;
-    background: #fafafa;
-    transition: 0.2s;
-}
-
-/* FOCO */
-input:focus,
-select:focus {
-    border-color: #3f5f8f;
-    background: #fff;
-    box-shadow: 0 0 0 1px rgba(63,95,143,0.2);
-}
-
-/* RADIO / CHECKBOX */
-input[type="radio"],
-input[type="checkbox"] {
-    transform: scale(0.8);
-    margin: 0 2px;
-}
-
-/* TEXTOS */
-strong {
-    font-size: 12px;
-    margin-right: 4px;
-    color: #444;
-}
-
-/* CURSO */
-td.curso {
-    background: #f6f8fa;
-    border: 1px solid #e2e6ea;
-    border-radius: 6px;
-    padding: 8px;
-}
-
-.curso {
-    gap: 6px;
-}
-
-.curso div {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-.curso label {
-    font-size: 10px;
-    color: #666;
-}
-
-/* BOTÕES */
-.buttons {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 10px;
-    padding-top: 6px;
-    border-top: 1px solid #eee;
-}
-
-input[type="submit"],
-input[type="reset"] {
-    padding: 6px 14px;
-    font-size: 12px;
-    border-radius: 4px;
-    border: none;
+    font-size: 0.9em;
     cursor: pointer;
 }
 
-/* CORES */
-input[type="submit"] {
-    background: #28a745;
+input[type="radio"],
+input[type="checkbox"] {
+    transform: scale(1.1);
+    cursor: pointer;
+    margin: 0;
+}
+
+/* =========================================
+   Blocos com Labels Em cima (Dados do Curso)
+   ========================================= */
+.bloco-label {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.bloco-label label {
+    font-size: 0.8em;
+    font-weight: 700;
+    color: #555;
+    text-transform: uppercase;
+}
+
+/* =========================================
+   Botões
+   ========================================= */
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 2px solid #eee;
+}
+
+.buttons input {
+    padding: 10px 25px;
+    font-size: 1em;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.buttons input:active {
+    transform: scale(0.98);
+}
+
+.buttons input[type="submit"] {
+    background-color: #28a745;
     color: white;
 }
 
-input[type="submit"]:hover {
-    background: #218838;
+.buttons input[type="submit"]:hover {
+    background-color: #218838;
 }
 
-input[type="reset"] {
-    background: #dc3545;
+.buttons input[type="reset"] {
+    background-color: #6c757d;
     color: white;
 }
 
-input[type="reset"]:hover {
-    background: #c82333;
-}
-
-/* RESPONSIVO */
-@media (max-width: 768px) {
-    td {
-        gap: 4px;
-    }
-
-    input {
-        width: 100% !important;
-    }
-
-    .curso {
-        flex-direction: column;
-    }
+.buttons input[type="reset"]:hover {
+    background-color: #5a6268;
 }

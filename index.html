@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<form name="matricula" class="form-moderno">
+<form name="matricula" class="form-moderno" method="POST">
 
     <div class="form-header">
         <h2>Ficha de Matrícula</h2>
@@ -21,46 +21,46 @@
         <h3 class="titulo-sessao">Dados do Aluno</h3>
         
         <div class="linha">
-            <input type="text" placeholder="Nome Completo:" style="flex: 1;" required>
+            <input type="text" name="nome_aluno" placeholder="Nome Completo:" style="flex: 1;" required>
         </div>
         
         <div class="linha">
-            <input type="text" placeholder="Endereço:" style="flex: 3;" required>
-            <input type="text" placeholder="Complemento:" style="flex: 1;">
+            <input type="text" name="endereco_aluno" placeholder="Endereço:" style="flex: 3;" required>
+            <input type="text" name="complemento_aluno" placeholder="Complemento:" style="flex: 1;">
         </div>
         
         <div class="linha">
-            <input type="text" placeholder="Cidade:" style="flex: 2;" required>
-            <input type="text" placeholder="Bairro:" style="flex: 2;" required>
-            <input type="text" placeholder="CEP:" style="flex: 1.5;" maxlength="9" oninput="mascaraCEP(this)">
-            <input type="text" placeholder="Estado:" style="flex: 1;">
+            <input type="text" name="cidade_aluno" placeholder="Cidade:" style="flex: 2;" required>
+            <input type="text" name="bairro_aluno" placeholder="Bairro:" style="flex: 2;" required>
+            <input type="text" name="cep_aluno" placeholder="CEP:" style="flex: 1.5;" maxlength="9" oninput="mascaraCEP(this)">
+            <input type="text" name="estado_aluno" placeholder="Estado:" style="flex: 1;">
             
             <div style="flex: 1.8; display: flex; align-items: center; gap: 8px;">
                 <strong class="label-destaque">Nasc:</strong>
-                <input type="date" style="flex: 1;" title="Data de Nascimento" required>
+                <input type="date" name="data_nasc_aluno" style="flex: 1;" title="Data de Nascimento" required>
             </div>
         </div>
         
         <div class="linha">
-            <input type="text" placeholder="Profissão:" style="flex: 2;">
-            <input type="email" placeholder="Email:" style="flex: 2;">
-            <input type="text" placeholder="Whatsapp:" style="flex: 1.5;" maxlength="15" oninput="mascaraTelefone(this)" required>
+            <input type="text" name="profissao_aluno" placeholder="Profissão:" style="flex: 2;">
+            <input type="email" name="email_aluno" placeholder="Email:" style="flex: 2;">
+            <input type="text" name="whatsapp_aluno" placeholder="Whatsapp:" style="flex: 1.5;" maxlength="15" oninput="mascaraTelefone(this)" required>
         </div>
         
         <div class="linha">
-            <input type="text" placeholder="Escolaridade:" style="flex: 2;" required>
+            <input type="text" name="escolaridade_aluno" placeholder="Escolaridade:" style="flex: 2;" required>
             <div class="opcoes-inline" style="flex: 1.5;">
                 <strong>Sexo:</strong>
-                <label><input type="radio" name="sexo" required> M</label>
-                <label><input type="radio" name="sexo"> F</label>
+                <label><input type="radio" name="sexo_aluno" value="M" required> M</label>
+                <label><input type="radio" name="sexo_aluno" value="F"> F</label>
             </div>
-            <input type="text" placeholder="RG:" style="flex: 1.5;" maxlength="12" oninput="mascaraRG(this)" required>
-            <input type="text" placeholder="Telefone Comercial:" style="flex: 2;" maxlength="15" oninput="mascaraTelefone(this)">
+            <input type="text" name="rg_aluno" placeholder="RG:" style="flex: 1.5;" maxlength="12" oninput="mascaraRG(this)" required>
+            <input type="text" name="tel_comercial_aluno" placeholder="Telefone Comercial:" style="flex: 2;" maxlength="15" oninput="mascaraTelefone(this)">
         </div>
 
         <div class="linha">
-            <input type="text" placeholder="Medicação:" style="flex: 2;">
-            <select style="flex: 1.5;" required>
+            <input type="text" name="medicacao_aluno" placeholder="Medicação:" style="flex: 2;">
+            <select name="estado_civil_aluno" style="flex: 1.5;" required>
                 <option value="" disabled selected>Estado Civil</option>
                 <option value="Solteiro(a)">Solteiro(a)</option>
                 <option value="Casado(a)">Casado(a)</option>
@@ -68,7 +68,7 @@
                 <option value="Viúvo(a)">Viúvo(a)</option>
                 <option value="União Estável">União Estável</option>
             </select>
-            <input type="text" placeholder="CPF:" style="flex: 1.5;" maxlength="14" oninput="mascaraCPF(this)" required>
+            <input type="text" name="cpf_aluno" placeholder="CPF:" style="flex: 1.5;" maxlength="14" oninput="mascaraCPF(this)" required>
         </div>
     </div>
 
@@ -76,46 +76,46 @@
         <h3 class="titulo-sessao">Responsável Financeiro</h3>
         
         <div class="linha">
-            <input type="text" placeholder="Nome Completo:" style="flex: 1;" required>
+            <input type="text" name="nome_responsavel" placeholder="Nome Completo:" style="flex: 1;" required>
         </div>
         
         <div class="linha">
-            <input type="text" placeholder="Endereço:" style="flex: 3;" required>
-            <input type="text" placeholder="Complemento:" style="flex: 1;">
+            <input type="text" name="endereco_responsavel" placeholder="Endereço:" style="flex: 3;" required>
+            <input type="text" name="complemento_responsavel" placeholder="Complemento:" style="flex: 1;">
         </div>
         
         <div class="linha">
-            <input type="text" placeholder="Cidade:" style="flex: 2;" required>
-            <input type="text" placeholder="Bairro:" style="flex: 2;" required>
-            <input type="text" placeholder="CEP:" style="flex: 1.5;" maxlength="9" oninput="mascaraCEP(this)">
-            <input type="text" placeholder="Estado:" style="flex: 1;">
+            <input type="text" name="cidade_responsavel" placeholder="Cidade:" style="flex: 2;" required>
+            <input type="text" name="bairro_responsavel" placeholder="Bairro:" style="flex: 2;" required>
+            <input type="text" name="cep_responsavel" placeholder="CEP:" style="flex: 1.5;" maxlength="9" oninput="mascaraCEP(this)">
+            <input type="text" name="estado_responsavel" placeholder="Estado:" style="flex: 1;">
             
             <div style="flex: 1.8; display: flex; align-items: center; gap: 8px;">
                 <strong class="label-destaque">Nasc:</strong>
-                <input type="date" style="flex: 1;" title="Data de Nascimento" required>
+                <input type="date" name="data_nasc_responsavel" style="flex: 1;" title="Data de Nascimento" required>
             </div>
         </div>
         
         <div class="linha">
-            <input type="text" placeholder="Profissão:" style="flex: 2;">
-            <input type="email" placeholder="Email:" style="flex: 2;">
-            <input type="text" placeholder="Telefone Residencial:" style="flex: 1.5;" maxlength="15" oninput="mascaraTelefone(this)" required>
+            <input type="text" name="profissao_responsavel" placeholder="Profissão:" style="flex: 2;">
+            <input type="email" name="email_responsavel" placeholder="Email:" style="flex: 2;">
+            <input type="text" name="tel_residencial" placeholder="Telefone Residencial:" style="flex: 1.5;" maxlength="15" oninput="mascaraTelefone(this)" required>
         </div>
         
         <div class="linha">
-            <input type="text" placeholder="Escolaridade:" style="flex: 2;" required>
+            <input type="text" name="escolaridade_responsavel" placeholder="Escolaridade:" style="flex: 2;" required>
             <div class="opcoes-inline" style="flex: 1.5;">
                 <strong>Sexo:</strong>
-                <label><input type="radio" name="sexo2" required> M</label>
-                <label><input type="radio" name="sexo2"> F</label>
+                <label><input type="radio" name="sexo_responsavel" value="M" required> M</label>
+                <label><input type="radio" name="sexo_responsavel" value="F"> F</label>
             </div>
-            <input type="text" placeholder="RG:" style="flex: 1.5;" maxlength="12" oninput="mascaraRG(this)" required>
-            <input type="text" placeholder="Telefone Comercial:" style="flex: 2;" maxlength="15" oninput="mascaraTelefone(this)">
+            <input type="text" name="rg_responsavel" placeholder="RG:" style="flex: 1.5;" maxlength="12" oninput="mascaraRG(this)" required>
+            <input type="text" name="tel_comercial_responsavel" placeholder="Telefone Comercial:" style="flex: 2;" maxlength="15" oninput="mascaraTelefone(this)">
         </div>
 
         <div class="linha">
-            <input type="text" id="campoCpfCnpj" placeholder="CPF/CNPJ:" style="flex: 2;" maxlength="18" oninput="mascaraDinamica(this)" required>
-            <select style="flex: 1.5;" required>
+            <input type="text" name="cpf_cnpj_responsavel" id="campoCpfCnpj" placeholder="CPF/CNPJ:" style="flex: 2;" maxlength="18" oninput="mascaraDinamica(this)" required>
+            <select name="estado_civil_responsavel" style="flex: 1.5;" required>
                 <option value="" disabled selected>Estado Civil</option>
                 <option value="Solteiro(a)">Solteiro(a)</option>
                 <option value="Casado(a)">Casado(a)</option>
@@ -123,7 +123,7 @@
                 <option value="Viúvo(a)">Viúvo(a)</option>
                 <option value="União Estável">União Estável</option>
             </select>
-            <input type="text" placeholder="Cargo:" style="flex: 2;">
+            <input type="text" name="cargo_responsavel" placeholder="Cargo:" style="flex: 2;">
         </div>
 
         <div class="linha">
@@ -139,22 +139,22 @@
         <h3 class="titulo-sessao">Investimento Educacional</h3>
         
         <div class="linha">
-            <input type="text" inputmode="numeric" placeholder="Taxa de Matrícula:" style="flex: 1;" oninput="mascaraMoeda(this)" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required>
+            <input type="text" name="taxa_matricula" inputmode="numeric" placeholder="Taxa de Matrícula:" style="flex: 1;" oninput="mascaraMoeda(this)" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required>
             
-            <input type="text" inputmode="numeric" placeholder="Taxa do Material WEB:" style="flex: 1.5;" oninput="mascaraMoeda(this)" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+            <input type="text" name="taxa_material" inputmode="numeric" placeholder="Taxa do Material WEB:" style="flex: 1.5;" oninput="mascaraMoeda(this)" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
             
-            <input type="text" inputmode="numeric" placeholder="Valor das Parcelas:" style="flex: 1;" oninput="mascaraMoeda(this)" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required>
+            <input type="text" name="valor_parcela" inputmode="numeric" placeholder="Valor das Parcelas:" style="flex: 1;" oninput="mascaraMoeda(this)" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required>
             
-            <input type="number" placeholder="Número de Parcelas:" style="flex: 1;" required>
+            <input type="number" name="num_parcelas" placeholder="Número de Parcelas:" style="flex: 1;" required>
         </div>
         
         <div class="linha">
             <div class="opcoes-inline" style="flex: 1;">
                 <strong>Vencimento:</strong>
-                <label><input type="radio" name="Vencimento" required> 10</label>
-                <label><input type="radio" name="Vencimento"> 20</label>
+                <label><input type="radio" name="vencimento" value="10" required> 10</label>
+                <label><input type="radio" name="vencimento" value="20"> 20</label>
             </div>
-            <input type="text" placeholder="Duração do Curso:" style="flex: 3;" required>
+            <input type="text" name="duracao_curso" placeholder="Duração do Curso:" style="flex: 3;" required>
         </div>
     </div>
 
@@ -164,15 +164,15 @@
         <div class="linha alinha-topo">
             <div class="bloco-label" style="flex: 2;">
                 <label>Curso</label>
-                <input type="text" placeholder="Ex: Informática">
+                <input type="text" name="nome_curso" placeholder="Ex: Informática">
             </div>
             <div class="bloco-label" style="flex: 2;">
                 <label>Turma</label>
-                <input type="text" placeholder="Ex: Turma A">
+                <input type="text" name="turma" placeholder="Ex: Turma A">
             </div>
             <div class="bloco-label" style="flex: 1.5;">
                 <label>Turno</label>
-                <select required>
+                <select name="turno" required>
                     <option value="" disabled selected>Selecione</option>
                     <option value="Manhã">Manhã</option>
                     <option value="Tarde">Tarde</option>
@@ -181,22 +181,22 @@
             </div>
             <div class="bloco-label" style="flex: 1.5;">
                 <label>Início do Curso</label>
-                <input type="date" required>
+                <input type="date" name="inicio_curso" required>
             </div>
             <div class="bloco-label" style="flex: 1.5;">
                 <label>Término do Curso</label>
-                <input type="date" required>
+                <input type="date" name="termino_curso" required>
             </div>
         </div>
 
         <div class="linha alinha-topo">
             <div class="bloco-label" style="flex: 1;">
                 <label>Carga Horária</label>
-                <input type="text" placeholder="Ex: 120 horas">
+                <input type="text" name="carga_horaria" placeholder="Ex: 120 horas">
             </div>
             <div class="bloco-label" style="flex: 1;">
                 <label>Sala</label>
-                <input type="text" placeholder="Ex: Laboratório 1">
+                <input type="text" name="sala" placeholder="Ex: Laboratório 1">
             </div>
         </div>
 
@@ -212,26 +212,23 @@
             </div>
             <div class="opcoes-inline">
                 <strong>Horário:</strong>
-                <input type="time" style="width: auto;" required> <span style="color:#6b7280; font-size:0.9em; font-weight:500;">às</span> <input type="time" style="width: auto;" required>
+                <input type="time" name="hora_inicio" style="width: auto;" required> <span style="color:#6b7280; font-size:0.9em; font-weight:500;">às</span> <input type="time" name="hora_termino" style="width: auto;" required>
             </div>
         </div>
 
         <div class="linha">
-            <input type="text" placeholder="Assinatura Primeira Aula:" style="flex: 1;">
+            <input type="text" name="assinatura_primeira_aula" placeholder="Assinatura Primeira Aula:" style="flex: 1;">
         </div>
 
         <div class="linha alinha-topo" style="margin-top: 15px;">
             <div class="bloco-label" style="flex: 1;">
                 <label>Contratante</label>
-                <input type="text" placeholder="Nome do Contratante" required>
+                <input type="text" name="contratante" placeholder="Nome do Contratante" required>
             </div>
-            <div class="bloco-label" style="flex: 1;">
-                <label>Contratada</label>
-                <input type="text" placeholder="Nome da Contratada">
-            </div>
+          
             <div class="bloco-label" style="flex: 1;">
                 <label>Data do Contrato</label>
-                <input type="date" title="Data do Contrato" required>
+                <input type="date" name="data_contrato" title="Data do Contrato" required>
             </div>
         </div>
     </div>

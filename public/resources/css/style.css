@@ -9,36 +9,32 @@
 }
 
 body {
-    background-color: #f3f4f6; /* Cinza bem suave e moderno */
+    background-color: #f3f4f6;
     color: #1f2937;
     padding: 30px 15px;
     display: flex;
     justify-content: center;
 }
 
-/* =========================================
-   Container Principal (Borda Nova e Compacto)
-   ========================================= */
 .form-moderno {
     background-color: #ffffff;
     width: 100%;
     max-width: 950px;
-    border-radius: 16px; 
-    border: 1px solid #cbd5e1; 
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08), 0 4px 10px rgba(0, 0, 0, 0.04); 
-    padding: 30px; 
+    border-radius: 16px;
+    border: 1px solid #cbd5e1;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08), 0 4px 10px rgba(0, 0, 0, 0.04);
+    padding: 30px;
 }
 
-/* Cabeçalho do Formulário */
 .form-header {
     text-align: center;
-    margin-bottom: 25px; 
-    padding-bottom: 15px; 
+    margin-bottom: 25px;
+    padding-bottom: 15px;
     border-bottom: 2px dashed #e5e7eb;
 }
 
 .form-header h2 {
-    color: #1e3a8a; 
+    color: #1e3a8a;
     font-size: 1.7em;
     font-weight: 700;
     margin-bottom: 6px;
@@ -51,33 +47,27 @@ body {
     font-weight: 400;
 }
 
-/* =========================================
-   Títulos das Seções
-   ========================================= */
 .sessao {
-    margin-bottom: 22px; 
+    margin-bottom: 22px;
 }
 
 .titulo-sessao {
     background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
     color: #ffffff;
-    padding: 10px 16px; 
+    padding: 10px 16px;
     font-size: 0.95em;
     font-weight: 600;
     border-radius: 8px;
     text-transform: uppercase;
     letter-spacing: 0.8px;
-    margin-bottom: 15px; 
-    box-shadow: 0 4px 6px rgba(59, 130, 246, 0.2); 
+    margin-bottom: 15px;
+    box-shadow: 0 4px 6px rgba(59, 130, 246, 0.2);
 }
 
-/* =========================================
-   Sistema de Linhas
-   ========================================= */
 .linha {
     display: flex;
-    gap: 12px; 
-    margin-bottom: 12px; 
+    gap: 12px;
+    margin-bottom: 12px;
     align-items: center;
     width: 100%;
 }
@@ -87,22 +77,19 @@ body {
 }
 
 .alinhar-cantos {
-    justify-content: space-between; 
+    justify-content: space-between;
 }
 
-/* =========================================
-   Estilização dos Campos (Inputs Modernos)
-   ========================================= */
 input[type="text"],
 input[type="email"],
 input[type="date"],
 input[type="time"],
 input[type="number"],
 select {
-    padding: 10px 12px; 
-    border: 1px solid #d1d5db; 
-    border-radius: 8px; 
-    background-color: #f9fafb; 
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background-color: #f9fafb;
     color: #374151;
     font-size: 0.9em;
     font-weight: 500;
@@ -115,7 +102,6 @@ select {
     font-weight: 400;
 }
 
-/* Efeito Glow ao clicar */
 input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="date"]:focus,
@@ -128,16 +114,13 @@ select:focus {
     background-color: #ffffff;
 }
 
-/* =========================================
-   Radios, Checkboxes e Textos de Apoio
-   ========================================= */
 .opcoes-inline {
     display: flex;
     align-items: center;
     gap: 12px;
     flex-wrap: wrap;
-    background: #f3f4f6; 
-    padding: 8px 12px; 
+    background: #f3f4f6;
+    padding: 8px 12px;
     border-radius: 8px;
     border: 1px solid #e5e7eb;
 }
@@ -165,16 +148,13 @@ input[type="checkbox"] {
     transform: scale(1.15);
     cursor: pointer;
     margin: 0;
-    accent-color: #3b82f6; 
+    accent-color: #3b82f6;
 }
 
-/* =========================================
-   Blocos com Labels Em cima
-   ========================================= */
 .bloco-label {
     display: flex;
     flex-direction: column;
-    gap: 4px; 
+    gap: 4px;
 }
 
 .bloco-label label {
@@ -186,53 +166,42 @@ input[type="checkbox"] {
     padding-left: 2px;
 }
 
-/* =========================================
-   Botões Premium
-   ========================================= */
 .buttons {
     display: flex;
     justify-content: flex-end;
     gap: 15px;
-    margin-top: 30px; 
+    margin-top: 30px;
     padding-top: 20px;
     border-top: 2px dashed #e5e7eb;
 }
 
-.buttons button {
-    padding: 10px 24px; 
-    font-size: 0.95em;
-    font-weight: 600;
+.btn-enviar,
+.btn-limpar {
+    padding: 12px 18px;
+    border-radius: 10px;
     border: none;
-    border-radius: 8px;
+    font-weight: 700;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.buttons button:active {
-    transform: translateY(2px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.25s ease;
 }
 
 .btn-enviar {
-    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-    color: white;
+    background: #4f46e5;
+    color: #fff;
 }
 
 .btn-enviar:hover {
-    box-shadow: 0 6px 12px rgba(16, 185, 129, 0.3);
-    filter: brightness(1.1);
+    background: #4338ca;
 }
 
 .btn-limpar {
-    background: #ffffff;
-    color: #4b5563;
-    border: 1px solid #d1d5db !important;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;
+    background: #e2e8f0;
+    color: #1f2937;
 }
 
-.btn-limpar:hover {
-    background: #f9fafb;
-    color: #1f2937;
-    border-color: #9ca3af !important;
+@media (max-width: 960px) {
+    .linha {
+        flex-direction: column;
+        align-items: stretch;
+    }
 }

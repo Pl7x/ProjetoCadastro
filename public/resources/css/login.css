@@ -104,23 +104,14 @@ button:hover {
     background: #4f46e5;
 }
 
-/* animação */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 
-.erro {
+.erro{
+    display: none;
     background: #ef4444;
     color: white;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 6px;
     margin-bottom: 15px;
+    text-align: center;
     font-size: 14px;
 }

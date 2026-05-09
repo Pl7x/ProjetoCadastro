@@ -1,128 +1,190 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
+/* =========================================================
+   VARIÁVEIS DE CORES (Padrão do Painel)
+   ========================================================= */
+:root {
+    --bg-main: #0B1221;         
+    --bg-card: #111A2E;         
+    --border-color: #1A2642;    
+    
+    --text-primary: #FFFFFF;    
+    --text-secondary: #8A99B5;  
+    
+    --primary-accent: #3B82F6;  
+    --primary-hover: #2563EB;   
+    
+    --danger-bg: rgba(239, 68, 68, 0.1); 
+    --danger-color: #EF4444;    
 }
 
-body{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:#f4f7fb;
-    padding:20px;
+/* =========================================================
+   RESET E BASE
+   ========================================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
-.container{
-    width:100%;
-    max-width:420px;
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--bg-main);
+    padding: 20px;
 }
 
-.login-card{
-    background:#ffffff;
-    padding:40px 35px;
-    border-radius:20px;
-    box-shadow:
-        0 10px 25px rgba(0,0,0,0.08),
-        0 4px 10px rgba(0,0,0,0.04);
-    animation:fadeIn .4s ease;
+.container {
+    width: 100%;
+    max-width: 420px;
 }
 
-.login-card h2{
-    font-size:32px;
-    color:#1f2937;
-    margin-bottom:8px;
-    text-align:center;
+/* =========================================================
+   CARTÃO DE LOGIN E CABEÇALHO
+   ========================================================= */
+.login-card {
+    background: var(--bg-card);
+    padding: 40px 35px;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    animation: fadeIn .4s ease;
 }
 
-.login-card p{
-    text-align:center;
-    color:#6b7280;
-    margin-bottom:30px;
-    font-size:15px;
+.login-header {
+    text-align: center;
+    margin-bottom: 30px;
 }
 
-.input-group{
-    margin-bottom:22px;
+/* Estilo novo para a logo */
+.logo {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    margin: 0 auto 15px auto; /* Centraliza a imagem horizontalmente */
+    display: block;
 }
 
-.input-group label{
-    display:block;
-    margin-bottom:8px;
-    font-size:14px;
-    color:#374151;
-    font-weight:600;
+.login-header h2 {
+    font-size: 28px;
+    color: var(--text-primary);
+    margin-bottom: 5px;
 }
 
-.input-group input{
-    width:100%;
-    height:52px;
-    border:1px solid #d1d5db;
-    border-radius:12px;
-    padding:0 15px;
-    font-size:15px;
-    transition:.2s ease;
-    background:#fafafa;
+.login-header p {
+    color: var(--text-secondary);
+    font-size: 15px;
 }
 
-.input-group input:focus{
-    border-color:#2563eb;
-    background:#fff;
-    outline:none;
-    box-shadow:0 0 0 4px rgba(37,99,235,0.12);
+/* =========================================================
+   INPUTS
+   ========================================================= */
+.input-group {
+    margin-bottom: 22px;
 }
 
-button{
-    width:100%;
-    height:52px;
-    border:none;
-    border-radius:12px;
-    background:#2563eb;
-    color:white;
-    font-size:16px;
-    font-weight:bold;
-    cursor:pointer;
-    transition:.2s ease;
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: var(--text-secondary);
+    font-weight: 600;
 }
 
-button:hover{
-    transform:translateY(-1px);
-    background:#1d4ed8;
+.input-group input {
+    width: 100%;
+    height: 52px;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 0 15px;
+    font-size: 15px;
+    color: var(--text-primary);
+    background: var(--bg-main);
+    transition: .2s ease;
 }
 
-button:active{
-    transform:scale(.99);
+.input-group input:focus {
+    border-color: var(--primary-accent);
+    background: var(--bg-card);
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
 }
 
-button:disabled{
-    opacity:.7;
-    cursor:not-allowed;
+/* =========================================================
+   CORREÇÃO DO AUTOCOMPLETAR DO NAVEGADOR
+   ========================================================= */
+.input-group input:-webkit-autofill,
+.input-group input:-webkit-autofill:hover, 
+.input-group input:-webkit-autofill:focus, 
+.input-group input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 50px var(--bg-main) inset !important;
+    -webkit-text-fill-color: var(--text-primary) !important;
+    border: 1px solid var(--border-color) !important;
+    transition: background-color 5000s ease-in-out 0s;
 }
 
-.erro{
-    width:100%;
-    background:#fee2e2;
-    color:#b91c1c;
-    border:1px solid #fecaca;
-    padding:14px;
-    border-radius:12px;
-    margin-bottom:20px;
-    text-align:center;
-    font-size:14px;
-    font-weight:600;
+.input-group input:-webkit-autofill:focus {
+    border-color: var(--primary-accent) !important;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), 0 0 0 50px var(--bg-card) inset !important;
 }
 
-@keyframes fadeIn{
+/* =========================================================
+   BOTÃO
+   ========================================================= */
+button {
+    width: 100%;
+    height: 52px;
+    border: none;
+    border-radius: 12px;
+    background: var(--primary-accent);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .2s ease;
+}
 
-    from{
-        opacity:0;
-        transform:translateY(15px);
+button:hover {
+    transform: translateY(-1px);
+    background: var(--primary-hover);
+}
+
+button:active {
+    transform: scale(.99);
+}
+
+button:disabled {
+    opacity: .7;
+    cursor: not-allowed;
+}
+
+/* =========================================================
+   MENSAGEM DE ERRO
+   ========================================================= */
+.erro {
+    width: 100%;
+    background: var(--danger-bg);
+    color: var(--danger-color);
+    border: 1px solid var(--danger-color);
+    padding: 14px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* =========================================================
+   ANIMAÇÕES
+   ========================================================= */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
     }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
-
 }

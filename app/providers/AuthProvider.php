@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Repositories\UserRepository;
+use App\Providers\DatabaseProvider; // <-- Importamos a conexão direta com o banco
 
 class AuthProvider
 {
@@ -19,11 +19,36 @@ class AuthProvider
     {
         self::startSession();
 
-        $user = UserRepository::findByEmailAndPassword($email, $senha);
-        if ($user === null) {
+        $conn = DatabaseProvider::connect();
+
+        // 1. Busca o usuário apenas pelo E-MAIL
+        $stmt = $conn->prepare("SELECT * FROM usuario WHERE email = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $user = $result->fetch_assoc();
+
+        // Se o usuário não for encontrado no banco
+        if (!$user) {
             return false;
         }
 
+        // 2. TRAVA DE SEGURANÇA: Bloqueia se o status for inativo
+        if (($user['status'] ?? 'ativo') === 'inativo') {
+            return false;
+        }
+
+        // 3. VERIFICAÇÃO DE SENHA CRIPTOGRAFADA
+        // Compara a senha digitada com o "Hash" gigante salvo no banco
+        if (!password_verify($senha, $user['senha'])) {
+            return false; // Senha incorreta
+        }
+
+        // 4. SUCESSO! Atualiza a data do último login
+        $userId = $user['id'];
+        $conn->query("UPDATE usuario SET ultimo_login = NOW() WHERE id = $userId");
+
+        // 5. Cria a sessão do usuário
         $_SESSION['id_usuario'] = $user['id'];
         $_SESSION['nome'] = $user['nome'];
         $_SESSION['tipo'] = $user['tipo'];

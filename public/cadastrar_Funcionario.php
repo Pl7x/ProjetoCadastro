@@ -16,10 +16,10 @@ include 'resources/layout/header.php';
         <form id="formCadastro">
             
             <div class="form-group">
-                <label for="nome">Nome Completo</label>
+                <label for="nome">Nome</label>
                 <div class="input-with-icon">
                     <i class="fa-solid fa-signature"></i>
-                    <input type="text" id="nome" name="nome" placeholder="Digite o nome completo" required>
+                    <input type="text" id="nome" name="nome" placeholder="Digite o nome do Funcionario" required>
                 </div>
             </div>
 

@@ -1,207 +1,332 @@
-/* =========================================
-   Reset e Nova Tipografia (Inter)
-   ========================================= */
+/* --- DESTRAVA O ESPAÇO DO PAINEL E SOBE A FICHA --- */
+.main-content {
+    flex: 1;
+    width: 100%;
+}
+
+.content-body {
+    width: 100%;
+    max-width: 100% !important;
+    padding: 0 30px 10px 30px; 
+}
+
+/* Reseta estilos básicos e herda a cor do tema */
 * {
     box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: inherit; 
     margin: 0;
     padding: 0;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-body {
-    background-color: #f3f4f6;
-    color: #1f2937;
-    padding: 30px 15px;
-    display: flex;
-    justify-content: center;
-}
-
+/* Container principal do formulário (Efeito Glassmorphism) */
 .form-moderno {
-    background-color: #ffffff;
     width: 100%;
-    max-width: 950px;
-    border-radius: 16px;
-    border: 1px solid #cbd5e1;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08), 0 4px 10px rgba(0, 0, 0, 0.04);
-    padding: 30px;
+    max-width: 100%;
+    margin: 0; 
+    padding: 15px 35px; 
+    background-color: rgba(15, 23, 42, 0.4); /* Tom levemente azul escuro para dar contraste */
+    border: 1px solid rgba(255, 255, 255, 0.05); /* Borda muito sutil */
+    border-radius: 10px; 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); 
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
 }
 
+/* Cabeçalho do Formulário */
 .form-header {
+    width: 100%;
+    margin-bottom: 15px; 
     text-align: center;
-    margin-bottom: 25px;
-    padding-bottom: 15px;
-    border-bottom: 2px dashed #e5e7eb;
 }
 
 .form-header h2 {
-    color: #1e3a8a;
-    font-size: 1.7em;
-    font-weight: 700;
-    margin-bottom: 6px;
-    letter-spacing: -0.5px;
+    margin-bottom: 4px;
+    font-size: 22px; 
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase; 
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5); /* Sombra leve no texto */
 }
 
 .form-header p {
-    color: #6b7280;
-    font-size: 0.9em;
-    font-weight: 400;
+    font-size: 13px;
+    opacity: 0.65;
 }
 
+/* --- PARTE SUPERIOR: 2 COLUNAS --- */
+.container-colunas {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 40px; 
+    width: 100%;
+    margin-bottom: 15px; 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08); 
+    padding-bottom: 15px; 
+}
+
+.coluna {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid rgba(255, 255, 255, 0.05); 
+    padding-right: 40px;
+}
+
+.coluna:last-child {
+    border-right: none;
+    padding-right: 0;
+}
+
+/* --- PARTE INFERIOR: LARGURA TOTAL --- */
+.container-full {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Sessões do formulário */
 .sessao {
-    margin-bottom: 22px;
+    width: 100%;
+    margin-bottom: 12px; 
 }
 
 .titulo-sessao {
-    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
-    color: #ffffff;
-    padding: 10px 16px;
-    font-size: 0.95em;
+    margin-bottom: 10px; 
+    font-size: 13px; 
     font-weight: 600;
-    border-radius: 8px;
+    text-align: left;
     text-transform: uppercase;
-    letter-spacing: 0.8px;
-    margin-bottom: 15px;
-    box-shadow: 0 4px 6px rgba(59, 130, 246, 0.2);
+    letter-spacing: 1.5px; 
+    color: rgba(255, 255, 255, 0.85);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 4px;
 }
 
+/* Estrutura horizontal das linhas */
 .linha {
     display: flex;
-    gap: 12px;
-    margin-bottom: 12px;
+    flex-direction: row;
+    flex-wrap: wrap; 
+    justify-content: flex-start;
     align-items: center;
+    gap: 12px; 
     width: 100%;
+    margin-bottom: 8px; 
 }
 
-.alinha-topo {
-    align-items: flex-start;
-}
+.alinha-topo { align-items: flex-start; }
+.alinhar-cantos { justify-content: space-between; }
 
-.alinhar-cantos {
-    justify-content: space-between;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="date"],
-input[type="time"],
-input[type="number"],
-select {
-    padding: 10px 12px;
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
-    background-color: #f9fafb;
-    color: #374151;
-    font-size: 0.9em;
-    font-weight: 500;
-    transition: all 0.25s ease;
+/* Estilos de Inputs e Selects */
+.form-moderno input[type="text"],
+.form-moderno input[type="email"],
+.form-moderno input[type="date"],
+.form-moderno input[type="time"],
+.form-moderno input[type="number"],
+.form-moderno select {
     width: 100%;
-}
-
-::placeholder {
-    color: #9ca3af;
-    font-weight: 400;
-}
-
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="date"]:focus,
-input[type="time"]:focus,
-input[type="number"]:focus,
-select:focus {
-    border-color: #3b82f6;
+    min-width: 80px; 
+    padding: 6px 12px;
+    background-color: rgba(0, 0, 0, 0.35); 
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Borda sutil */
+    border-radius: 5px;
+    font-size: 13px; 
+    height: 34px; 
     outline: none;
-    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
-    background-color: #ffffff;
+    transition: all 0.3s ease; 
+    color: #e2e8f0; 
 }
 
+.form-moderno input::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* Efeito ao focar no campo (Animação Azul Moderna) */
+.form-moderno input:focus,
+.form-moderno select:focus {
+    border-color: rgba(59, 130, 246, 0.7); /* Azul vibrante na borda */
+    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15); /* Ring de foco azul */
+}
+
+/* === ESTILIZAÇÃO DAS OPÇÕES DO SELECT === */
+.form-moderno select option {
+    background-color: #1a2235; 
+    color: #e2e8f0; 
+}
+
+.form-moderno select option:disabled {
+    color: rgba(255, 255, 255, 0.4); 
+}
+
+/* === ESTILIZAÇÃO DOS RADIOS E CHECKBOXES === */
+.form-moderno input[type="radio"],
+.form-moderno input[type="checkbox"] {
+    accent-color: #3b82f6; /* Pinta os seletores de azul moderno */
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+    margin: 0;
+}
+
+/* === CORREÇÃO DEFINITIVA DO AUTOCOMPLETE DO GOOGLE === */
+.form-moderno input:-webkit-autofill,
+.form-moderno input:-webkit-autofill:hover, 
+.form-moderno input:-webkit-autofill:focus, 
+.form-moderno input:-webkit-autofill:active,
+.form-moderno select:-webkit-autofill,
+.form-moderno select:-webkit-autofill:hover,
+.form-moderno select:-webkit-autofill:focus {
+    transition: background-color 5000s ease-in-out 0s, color 5000s ease-in-out 0s !important;
+    -webkit-text-fill-color: #e2e8f0 !important;
+}
+
+/* Estrutura de label + input */
+.bloco-label {
+    display: flex;
+    flex-direction: column;
+    gap: 5px; 
+    text-align: left;
+    min-width: 80px;
+}
+
+.bloco-label label {
+    font-weight: 500;
+    font-size: 12px; 
+    opacity: 0.75;
+}
+
+/* Ajuste do Horário (Mantendo à direita) */
+.bloco-horario {
+    margin-left: auto; 
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; 
+}
+
+.bloco-horario label {
+    text-align: right;
+    width: 100%;
+}
+
+.bloco-horario .opcoes-inline {
+    justify-content: flex-end; 
+}
+
+/* === OPÇÕES INLINE (CORREÇÃO DO SEXO E ALINHAMENTOS) === */
 .opcoes-inline {
     display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap; /* IMPEDE A QUEBRA DE LINHA DO M E F */
     align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-    background: #f3f4f6;
-    padding: 8px 12px;
-    border-radius: 8px;
-    border: 1px solid #e5e7eb;
+    gap: 12px; 
+    font-size: 13px; 
+    height: 34px; /* Mantém a mesma altura do input para alinhar perfeitamente */
 }
 
-.opcoes-inline strong, .label-destaque {
-    color: #4b5563;
-    font-size: 0.85em;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+/* Específico para Dias da semana, permitindo quebrar caso a tela seja muito pequena */
+.check-dias {
+    flex-wrap: wrap; 
+    height: auto; 
+    padding: 6px 0;
+}
+
+.opcoes-inline strong {
+    margin-right: 2px;
+    font-weight: 500;
+    opacity: 0.85;
 }
 
 .opcoes-inline label {
     display: flex;
     align-items: center;
-    gap: 6px;
-    font-size: 0.9em;
-    color: #374151;
-    font-weight: 500;
-    cursor: pointer;
-}
-
-input[type="radio"],
-input[type="checkbox"] {
-    transform: scale(1.15);
-    cursor: pointer;
-    margin: 0;
-    accent-color: #3b82f6;
-}
-
-.bloco-label {
-    display: flex;
-    flex-direction: column;
     gap: 4px;
+    cursor: pointer;
+    white-space: nowrap; /* Garante que o texto não descole da bolinha */
+    transition: opacity 0.2s;
 }
 
-.bloco-label label {
-    font-size: 0.75em;
-    font-weight: 700;
-    color: #6b7280;
+.opcoes-inline label:hover {
+    opacity: 0.8;
+}
+
+/* --- BOTÕES (ISOLADOS PARA NÃO AFETAR O MENU LATERAL) --- */
+.form-moderno .buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    margin-top: 0; 
+    padding-top: 15px; 
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.form-moderno .buttons button {
+    padding: 0 30px; 
+    height: 38px; 
+    background-color: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 6px; 
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    padding-left: 2px;
+    transition: all 0.3s ease;
 }
 
-.buttons {
-    display: flex;
-    justify-content: flex-end;
-    gap: 15px;
-    margin-top: 30px;
-    padding-top: 20px;
-    border-top: 2px dashed #e5e7eb;
-}
-
-.btn-enviar,
-.btn-limpar {
-    padding: 12px 18px;
-    border-radius: 10px;
-    border: none;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background-color 0.25s ease;
-}
-
-.btn-enviar {
-    background: #4f46e5;
+/* Destaque para o botão principal */
+.form-moderno .buttons button.btn-enviar {
+    background-color: rgba(59, 130, 246, 0.15); /* Fundo sutilmente azul */
+    border-color: rgba(59, 130, 246, 0.5); /* Borda azul */
     color: #fff;
 }
 
-.btn-enviar:hover {
-    background: #4338ca;
+.form-moderno .buttons button:hover {
+    background-color: rgba(59, 130, 246, 0.8);
+    border-color: #3b82f6;
+    transform: translateY(-2px); 
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); /* Sombra azul ao passar o mouse */
 }
 
-.btn-limpar {
-    background: #e2e8f0;
-    color: #1f2937;
+.form-moderno .buttons button.btn-limpar:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-@media (max-width: 960px) {
-    .linha {
-        flex-direction: column;
-        align-items: stretch;
+.form-moderno .buttons button:active {
+    transform: translateY(0); 
+}
+
+/* --- RESPONSIVIDADE (Telas Menores) --- */
+@media (max-width: 992px) {
+    .container-colunas {
+        grid-template-columns: 1fr; 
+        gap: 25px;
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+    
+    .coluna {
+        border-right: none;
+        padding-right: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        padding-bottom: 20px;
+    }
+    
+    .coluna:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    .form-moderno {
+        padding: 20px;
+    }
+    
+    .content-body {
+        padding: 10px;
     }
 }

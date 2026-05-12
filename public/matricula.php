@@ -1,22 +1,37 @@
 <?php
-require_once __DIR__ . '/../app/bootstrap.php';
+$titulo_pagina = "Ficha de Matrícula";
+$pagina_ativa = "matricula";
 
-use App\Middlewares\AuthMiddleware;
+include 'resources/layout/header.php';
+use App\Providers\DatabaseProvider;
 
-AuthMiddleware::requireLogin();
+
+$usuarioLogadoId = $user['id'] ?? null;
+
+
+$usuarios = [];
+
+try {
+    $conn = DatabaseProvider::connect();
+    $queryUsuarios = $conn->query("SELECT id, nome FROM usuario WHERE status = 'ativo' ORDER BY nome ASC");
+
+} catch (Exception $e) {
+    echo "Erro ao buscar usuários: " . $e->getMessage();
+    exit;
+}
+
+if ($queryUsuarios) {
+    while ($row = $queryUsuarios->fetch_assoc()) {
+        $usuarios[] = $row;
+    }
+} else {
+    echo "Erro na consulta de usuários: " . $conn->error;
+    exit;
+}
 ?>
 
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <title>Ficha de Matrícula</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="resources/css/style.css">
-</head>
-<body>
+
+<link rel="stylesheet" href="resources/css/style.css?v=<?php echo time(); ?>">
 
 <form name="matricula" class="form-moderno" method="POST" action="salvar.php">
 
@@ -25,223 +40,237 @@ AuthMiddleware::requireLogin();
         <p>Preencha os dados abaixo com atenção para realizar o cadastro.</p>
     </div>
 
-    <div class="sessao">
-        <h3 class="titulo-sessao">Dados do Aluno</h3>
+    <div class="container-colunas">
         
-        <div class="linha">
-            <input type="text" name="nome_aluno" placeholder="Nome Completo:" style="flex: 1;" required>
-        </div>
-        
-        <div class="linha">
-            <input type="text" name="endereco_aluno" placeholder="Endereço:" style="flex: 3;" required>
-            <input type="text" name="complemento_aluno" placeholder="Complemento:" style="flex: 1;">
-        </div>
-        
-        <div class="linha">
-            <input type="text" name="cidade_aluno" placeholder="Cidade:" style="flex: 2;" required>
-            <input type="text" name="bairro_aluno" placeholder="Bairro:" style="flex: 2;" required>
-            <input type="text" name="cep_aluno" placeholder="CEP:" style="flex: 1.5;" maxlength="9" oninput="mascaraCEP(this)">
-            <input type="text" name="estado_aluno" placeholder="Estado:" style="flex: 1;">
+        <div class="coluna">
             
-            <div style="flex: 1.8; display: flex; align-items: center; gap: 8px;">
-                <strong class="label-destaque">Nasc:</strong>
-                <input type="date" name="data_nasc_aluno" style="flex: 1;" title="Data de Nascimento" required>
-            </div>
-        </div>
-        
-        <div class="linha">
-            <input type="text" name="profissao_aluno" placeholder="Profissão:" style="flex: 2;">
-            <input type="email" name="email_aluno" placeholder="Email:" style="flex: 2;">
-            <input type="text" name="whatsapp_aluno" placeholder="Whatsapp:" style="flex: 1.5;" maxlength="15" oninput="mascaraTelefone(this)" required>
-        </div>
-        
-        <div class="linha">
-            <input type="text" name="escolaridade_aluno" placeholder="Escolaridade:" style="flex: 2;" required>
-            <div class="opcoes-inline" style="flex: 1.5;">
-                <strong>Sexo:</strong>
-                <label><input type="radio" name="sexo_aluno" value="M" required> M</label>
-                <label><input type="radio" name="sexo_aluno" value="F"> F</label>
-            </div>
-            <input type="text" name="rg_aluno" placeholder="RG:" style="flex: 1.5;" maxlength="12" oninput="mascaraRG(this)" required>
-            <input type="text" name="tel_comercial_aluno" placeholder="Telefone Comercial:" style="flex: 2;" maxlength="15" oninput="mascaraTelefone(this)">
-        </div>
+            <div class="sessao">
+                <h3 class="titulo-sessao">Dados do Aluno</h3>
+                
+                <div class="linha">
+                    <input type="text" name="nome_aluno" placeholder="Nome Completo:" style="flex: 1;" required>
+                </div>
+                
+                <div class="linha">
+                    <input type="text" name="endereco_aluno" placeholder="Endereço:" style="flex: 3;" required>
+                    <input type="text" name="complemento_aluno" placeholder="Complemento:" style="flex: 1;">
+                </div>
+                
+                <div class="linha">
+                    <input type="text" name="cidade_aluno" placeholder="Cidade:" style="flex: 2;" required>
+                    <input type="text" name="bairro_aluno" placeholder="Bairro:" style="flex: 2;" required>
+                    <input type="text" name="cep_aluno" placeholder="CEP:" style="flex: 1.5;" maxlength="9" oninput="mascaraCEP(this)">
+                    <input type="text" name="estado_aluno" placeholder="Estado:" style="flex: 1;">
+                    
+                    <div style="flex: 1.8; display: flex; align-items: center; gap: 8px;">
+                        <strong class="label-destaque">Nasc:</strong>
+                        <input type="date" name="data_nasc_aluno" style="flex: 1;" title="Data de Nascimento" required>
+                    </div>
+                </div>
+                
+                <div class="linha">
+                    <input type="text" name="profissao_aluno" placeholder="Profissão:" style="flex: 2;">
+                    <input type="email" name="email_aluno" placeholder="Email:" style="flex: 2;">
+                    <input type="text" name="whatsapp_aluno" placeholder="Whatsapp:" style="flex: 1.5;" maxlength="15" oninput="mascaraTelefone(this)" required>
+                </div>
+                
+                <div class="linha">
+                    <input type="text" name="escolaridade_aluno" placeholder="Escolaridade:" style="flex: 2;" required>
+                    <div class="opcoes-inline" style="flex: 1.5;">
+                        <strong>Sexo:</strong>
+                        <label><input type="radio" name="sexo_aluno" value="M" required> M</label>
+                        <label><input type="radio" name="sexo_aluno" value="F"> F</label>
+                    </div>
+                    <input type="text" name="rg_aluno" placeholder="RG:" style="flex: 1.5;" maxlength="12" oninput="mascaraRG(this)" required>
+                    <input type="text" name="tel_comercial_aluno" placeholder="Telefone Comercial:" style="flex: 2;" maxlength="15" oninput="mascaraTelefone(this)">
+                </div>
 
-        <div class="linha">
-            <input type="text" name="medicacao_aluno" placeholder="Medicação:" style="flex: 2;">
-            <select name="estado_civil_aluno" style="flex: 1.5;" required>
-                <option value="" disabled selected>Estado Civil</option>
-                <option value="Solteiro(a)">Solteiro(a)</option>
-                <option value="Casado(a)">Casado(a)</option>
-                <option value="Divorciado(a)">Divorciado(a)</option>
-                <option value="Viúvo(a)">Viúvo(a)</option>
-                <option value="União Estável">União Estável</option>
-            </select>
-            <input type="text" name="cpf_aluno" placeholder="CPF:" style="flex: 1.5;" maxlength="14" oninput="mascaraCPF(this)" required>
-        </div>
-    </div>
+                <div class="linha">
+                    <input type="text" name="medicacao_aluno" placeholder="Medicação:" style="flex: 2;">
+                    <select name="estado_civil_aluno" style="flex: 1.5;" required>
+                        <option value="" disabled selected>Estado Civil</option>
+                        <option value="Solteiro(a)">Solteiro(a)</option>
+                        <option value="Casado(a)">Casado(a)</option>
+                        <option value="Divorciado(a)">Divorciado(a)</option>
+                        <option value="Viúvo(a)">Viúvo(a)</option>
+                        <option value="União Estável">União Estável</option>
+                    </select>
+                    <input type="text" name="cpf_aluno" placeholder="CPF:" style="flex: 1.5;" maxlength="14" oninput="mascaraCPF(this)" required>
+                </div>
+            </div> <div class="sessao">
+                <h3 class="titulo-sessao">Responsável Financeiro</h3>
+                
+                <div class="linha">
+                    <input type="text" name="nome_responsavel" placeholder="Nome Completo:" style="flex: 1;" required>
+                </div>
+                
+                <div class="linha">
+                    <input type="text" name="endereco_responsavel" placeholder="Endereço:" style="flex: 3;" required>
+                    <input type="text" name="complemento_responsavel" placeholder="Complemento:" style="flex: 1;">
+                </div>
+                
+                <div class="linha">
+                    <input type="text" name="cidade_responsavel" placeholder="Cidade:" style="flex: 2;" required>
+                    <input type="text" name="bairro_responsavel" placeholder="Bairro:" style="flex: 2;" required>
+                    <input type="text" name="cep_responsavel" placeholder="CEP:" style="flex: 1.5;" maxlength="9" oninput="mascaraCEP(this)">
+                    <input type="text" name="estado_responsavel" placeholder="Estado:" style="flex: 1;">
+                    
+                    <div style="flex: 1.8; display: flex; align-items: center; gap: 8px;">
+                        <strong class="label-destaque">Nasc:</strong>
+                        <input type="date" name="data_nasc_responsavel" style="flex: 1;" title="Data de Nascimento" required>
+                    </div>
+                </div>
+                
+                <div class="linha">
+                    <input type="text" name="profissao_responsavel" placeholder="Profissão:" style="flex: 2;">
+                    <input type="email" name="email_responsavel" placeholder="Email:" style="flex: 2;">
+                    <input type="text" name="tel_residencial" placeholder="Telefone Residencial:" style="flex: 1.5;" maxlength="15" oninput="mascaraTelefone(this)" required>
+                </div>
+                
+                <div class="linha">
+                    <input type="text" name="escolaridade_responsavel" placeholder="Escolaridade:" style="flex: 2;" required>
+                    <div class="opcoes-inline" style="flex: 1.5;">
+                        <strong>Sexo:</strong>
+                        <label><input type="radio" name="sexo_responsavel" value="M" required> M</label>
+                        <label><input type="radio" name="sexo_responsavel" value="F"> F</label>
+                    </div>
+                    <input type="text" name="rg_responsavel" placeholder="RG:" style="flex: 1.5;" maxlength="12" oninput="mascaraRG(this)" required>
+                    <input type="text" name="tel_comercial_responsavel" placeholder="Telefone Comercial:" style="flex: 2;" maxlength="15" oninput="mascaraTelefone(this)">
+                </div>
 
-    <div class="sessao">
-        <h3 class="titulo-sessao">Responsável Financeiro</h3>
-        
-        <div class="linha">
-            <input type="text" name="nome_responsavel" placeholder="Nome Completo:" style="flex: 1;" required>
-        </div>
-        
-        <div class="linha">
-            <input type="text" name="endereco_responsavel" placeholder="Endereço:" style="flex: 3;" required>
-            <input type="text" name="complemento_responsavel" placeholder="Complemento:" style="flex: 1;">
-        </div>
-        
-        <div class="linha">
-            <input type="text" name="cidade_responsavel" placeholder="Cidade:" style="flex: 2;" required>
-            <input type="text" name="bairro_responsavel" placeholder="Bairro:" style="flex: 2;" required>
-            <input type="text" name="cep_responsavel" placeholder="CEP:" style="flex: 1.5;" maxlength="9" oninput="mascaraCEP(this)">
-            <input type="text" name="estado_responsavel" placeholder="Estado:" style="flex: 1;">
+                <div class="linha">
+                    <input type="text" name="cpf_cnpj_responsavel" id="campoCpfCnpj" placeholder="CPF/CNPJ:" style="flex: 2;" maxlength="18" oninput="mascaraDinamica(this)" required>
+                    <select name="estado_civil_responsavel" style="flex: 1.5;" required>
+                        <option value="" disabled selected>Estado Civil</option>
+                        <option value="Solteiro(a)">Solteiro(a)</option>
+                        <option value="Casado(a)">Casado(a)</option>
+                        <option value="Divorciado(a)">Divorciado(a)</option>
+                        <option value="Viúvo(a)">Viúvo(a)</option>
+                        <option value="União Estável">União Estável</option>
+                    </select>
+                    <input type="text" name="cargo_responsavel" placeholder="Cargo:" style="flex: 2;">
+                </div>
+
+                <div class="linha">
+                    <div class="opcoes-inline">
+                        <strong>Tipo de Pessoa:</strong>
+                        <label><input type="radio" name="Pessoa" id="radioFisica"> Física</label>
+                        <label><input type="radio" name="Pessoa" id="radioJuridica"> Jurídica</label>
+                    </div>
+                </div>
+            </div> </div> <div class="coluna">
             
-            <div style="flex: 1.8; display: flex; align-items: center; gap: 8px;">
-                <strong class="label-destaque">Nasc:</strong>
-                <input type="date" name="data_nasc_responsavel" style="flex: 1;" title="Data de Nascimento" required>
-            </div>
-        </div>
-        
-        <div class="linha">
-            <input type="text" name="profissao_responsavel" placeholder="Profissão:" style="flex: 2;">
-            <input type="email" name="email_responsavel" placeholder="Email:" style="flex: 2;">
-            <input type="text" name="tel_residencial" placeholder="Telefone Residencial:" style="flex: 1.5;" maxlength="15" oninput="mascaraTelefone(this)" required>
-        </div>
-        
-        <div class="linha">
-            <input type="text" name="escolaridade_responsavel" placeholder="Escolaridade:" style="flex: 2;" required>
-            <div class="opcoes-inline" style="flex: 1.5;">
-                <strong>Sexo:</strong>
-                <label><input type="radio" name="sexo_responsavel" value="M" required> M</label>
-                <label><input type="radio" name="sexo_responsavel" value="F"> F</label>
-            </div>
-            <input type="text" name="rg_responsavel" placeholder="RG:" style="flex: 1.5;" maxlength="12" oninput="mascaraRG(this)" required>
-            <input type="text" name="tel_comercial_responsavel" placeholder="Telefone Comercial:" style="flex: 2;" maxlength="15" oninput="mascaraTelefone(this)">
-        </div>
+            <div class="sessao">
+                <h3 class="titulo-sessao">Investimento Educacional</h3>
+                
+                <div class="linha">
+                    <input type="text" name="taxa_matricula" inputmode="numeric" placeholder="Taxa de Matrícula:" style="flex: 1;" oninput="mascaraMoeda(this)" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required>
+                    <input type="text" name="taxa_material" inputmode="numeric" placeholder="Taxa do Material WEB:" style="flex: 1.5;" oninput="mascaraMoeda(this)" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                </div>
+                
+                <div class="linha">
+                    <input type="text" name="valor_parcela" inputmode="numeric" placeholder="Valor das Parcelas:" style="flex: 1;" oninput="mascaraMoeda(this)" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required>
+                    <input type="number" name="num_parcelas" placeholder="Nº de Parcelas:" style="flex: 1;" required>
+                </div>
+                
+                <div class="linha">
+                    <div class="opcoes-inline" style="flex: 1;">
+                        <strong>Vencimento:</strong>
+                        <label><input type="radio" name="vencimento" value="10" required> 10</label>
+                        <label><input type="radio" name="vencimento" value="20"> 20</label>
+                    </div>
+                    <input type="text" name="duracao_curso" placeholder="Duração do Curso:" style="flex: 2;" required>
+                </div>
+            </div> <div class="sessao">
+                <h3 class="titulo-sessao">Dados do Curso</h3>
+                
+                <div class="linha alinha-topo">
+                    <div class="bloco-label" style="flex: 2;">
+                        <label>Curso</label>
+                        <input type="text" name="nome_curso" placeholder="Ex: Informática">
+                    </div>
+                    <div class="bloco-label" style="flex: 2;">
+                        <label>Turma</label>
+                        <input type="text" name="turma" placeholder="Ex: Turma A">
+                    </div>
+                </div>
+                
+                <div class="linha alinha-topo">
+                    <div class="bloco-label" style="flex: 1.5;">
+                        <label>Turno</label>
+                        <select name="turno" required>
+                            <option value="" disabled selected>Selecione</option>
+                            <option value="Manhã">Manhã</option>
+                            <option value="Tarde">Tarde</option>
+                            <option value="Noite">Noite</option>
+                        </select>
+                    </div>
+                    <div class="bloco-label" style="flex: 1;">
+                        <label>Sala</label>
+                        <input type="text" name="sala" placeholder="Ex: Lab 1">
+                    </div>
+                </div>
+                
+                <div class="linha alinha-topo">
+                    <div class="bloco-label" style="flex: 1.5;">
+                        <label>Início do Curso</label>
+                        <input type="date" name="inicio_curso" required>
+                    </div>
+                    <div class="bloco-label" style="flex: 1.5;">
+                        <label>Término do Curso</label>
+                        <input type="date" name="termino_curso" required>
+                    </div>
+                </div>
 
-        <div class="linha">
-            <input type="text" name="cpf_cnpj_responsavel" id="campoCpfCnpj" placeholder="CPF/CNPJ:" style="flex: 2;" maxlength="18" oninput="mascaraDinamica(this)" required>
-            <select name="estado_civil_responsavel" style="flex: 1.5;" required>
-                <option value="" disabled selected>Estado Civil</option>
-                <option value="Solteiro(a)">Solteiro(a)</option>
-                <option value="Casado(a)">Casado(a)</option>
-                <option value="Divorciado(a)">Divorciado(a)</option>
-                <option value="Viúvo(a)">Viúvo(a)</option>
-                <option value="União Estável">União Estável</option>
-            </select>
-            <input type="text" name="cargo_responsavel" placeholder="Cargo:" style="flex: 2;">
-        </div>
+                <div class="linha">
+                    <div class="bloco-label" style="flex: 1;">
+                        <label>Carga Horária</label>
+                        <input type="text" name="carga_horaria" placeholder="Ex: 120 horas">
+                    </div>
+                        <div class="bloco-label bloco-horario" style="flex: 1;">
+                            <label>Horário</label>
+                            <div class="opcoes-inline" style="height: 30px;">
+                                <input type="time" name="hora_inicio" style="width: auto;" required> 
+                                <span>às</span> 
+                                <input type="time" name="hora_termino" style="width: auto;" required>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="linha">
-            <div class="opcoes-inline">
-                <strong>Tipo de Pessoa:</strong>
-                <label><input type="radio" name="Pessoa" id="radioFisica"> Física</label>
-                <label><input type="radio" name="Pessoa" id="radioJuridica"> Jurídica</label>
-            </div>
-        </div>
-    </div>
+                <div class="linha">
+                    <div class="opcoes-inline check-dias">
+                        <strong>Dias:</strong>
+                        <label><input type="checkbox" name="dias" value="Seg"> Seg</label>
+                        <label><input type="checkbox" name="dias" value="Ter"> Ter</label>
+                        <label><input type="checkbox" name="dias" value="Qua"> Qua</label>
+                        <label><input type="checkbox" name="dias" value="Qui"> Qui</label>
+                        <label><input type="checkbox" name="dias" value="Sex"> Sex</label>
+                        <label><input type="checkbox" name="dias" value="Sab"> Sab</label>
+                    </div>
+                </div>
 
-    <div class="sessao">
-        <h3 class="titulo-sessao">Investimento Educacional</h3>
-        
-        <div class="linha">
-            <input type="text" name="taxa_matricula" inputmode="numeric" placeholder="Taxa de Matrícula:" style="flex: 1;" oninput="mascaraMoeda(this)" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required>
-            
-            <input type="text" name="taxa_material" inputmode="numeric" placeholder="Taxa do Material WEB:" style="flex: 1.5;" oninput="mascaraMoeda(this)" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
-            
-            <input type="text" name="valor_parcela" inputmode="numeric" placeholder="Valor das Parcelas:" style="flex: 1;" oninput="mascaraMoeda(this)" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required>
-            
-            <input type="number" name="num_parcelas" placeholder="Número de Parcelas:" style="flex: 1;" required>
-        </div>
-        
-        <div class="linha">
-            <div class="opcoes-inline" style="flex: 1;">
-                <strong>Vencimento:</strong>
-                <label><input type="radio" name="vencimento" value="10" required> 10</label>
-                <label><input type="radio" name="vencimento" value="20"> 20</label>
-            </div>
-            <input type="text" name="duracao_curso" placeholder="Duração do Curso:" style="flex: 3;" required>
-        </div>
-    </div>
+                <div class="linha">
+                    <input type="text" name="assinatura_primeira_aula" placeholder="Assinatura Primeira Aula:" style="flex: 1;">
+                </div>
 
-    <div class="sessao">
-        <h3 class="titulo-sessao">Dados do Curso</h3>
-        
-        <div class="linha alinha-topo">
-            <div class="bloco-label" style="flex: 2;">
-                <label>Curso</label>
-                <input type="text" name="nome_curso" placeholder="Ex: Informática">
-            </div>
-            <div class="bloco-label" style="flex: 2;">
-                <label>Turma</label>
-                <input type="text" name="turma" placeholder="Ex: Turma A">
-            </div>
-            <div class="bloco-label" style="flex: 1.5;">
-                <label>Turno</label>
-                <select name="turno" required>
-                    <option value="" disabled selected>Selecione</option>
-                    <option value="Manhã">Manhã</option>
-                    <option value="Tarde">Tarde</option>
-                    <option value="Noite">Noite</option>
-                </select>
-            </div>
-            <div class="bloco-label" style="flex: 1.5;">
-                <label>Início do Curso</label>
-                <input type="date" name="inicio_curso" required>
-            </div>
-            <div class="bloco-label" style="flex: 1.5;">
-                <label>Término do Curso</label>
-                <input type="date" name="termino_curso" required>
-            </div>
-        </div>
-
-        <div class="linha alinha-topo">
-            <div class="bloco-label" style="flex: 1;">
-                <label>Carga Horária</label>
-                <input type="text" name="carga_horaria" placeholder="Ex: 120 horas">
-            </div>
-            <div class="bloco-label" style="flex: 1;">
-                <label>Sala</label>
-                <input type="text" name="sala" placeholder="Ex: Laboratório 1">
-            </div>
-        </div>
-
-        <div class="linha alinhar-cantos">
-            <div class="opcoes-inline check-dias">
-                <strong>Dias:</strong>
-                <label><input type="checkbox" name="dias" value="Seg"> Seg</label>
-                <label><input type="checkbox" name="dias" value="Ter"> Ter</label>
-                <label><input type="checkbox" name="dias" value="Qua"> Qua</label>
-                <label><input type="checkbox" name="dias" value="Qui"> Qui</label>
-                <label><input type="checkbox" name="dias" value="Sex"> Sex</label>
-                <label><input type="checkbox" name="dias" value="Sab"> Sab</label>
-            </div>
-            <div class="opcoes-inline">
-                <strong>Horário:</strong>
-                <input type="time" name="hora_inicio" style="width: auto;" required> <span style="color:#6b7280; font-size:0.9em; font-weight:500;">às</span> <input type="time" name="hora_termino" style="width: auto;" required>
-            </div>
-        </div>
-
-        <div class="linha">
-            <input type="text" name="assinatura_primeira_aula" placeholder="Assinatura Primeira Aula:" style="flex: 1;">
-        </div>
-
-        <div class="linha alinha-topo" style="margin-top: 15px;">
-            <div class="bloco-label" style="flex: 1;">
-                <label>Contratante</label>
-                <input type="text" name="contratante" placeholder="Nome do Contratante" required>
-            </div>
-          
-            <div class="bloco-label" style="flex: 1;">
-                <label>Data do Contrato</label>
-                <input type="date" name="data_contrato" title="Data do Contrato" required>
-            </div>
-        </div>
-    </div>
-
-    <div class="buttons">
+                <div class="linha alinha-topo" style="margin-top: 15px;">
+                    <div class="bloco-label" style="flex: 2;">
+                        <label>Contratante</label> 
+                        <select name="contratante_id" required> 
+                            <option value="" disabled <?= (!$usuarioLogadoId) ? 'selected' : ''; ?>> Selecione o contratante </option>
+                             <?php foreach($usuarios as $usuario): ?> 
+                                <option value="<?= $usuario['id']; ?>"
+                                 <?= ($usuario['id'] == $usuarioLogadoId) ? 'selected' : ''; ?> >
+                                  <?= htmlspecialchars($usuario['nome']); ?>
+                                 </option> <?php endforeach; ?> 
+                        </select>
+                    </div>
+                    <div class="bloco-label" style="flex: 1.5;">
+                        <label>Data Contrato</label>
+                        <input type="date" name="data_contrato" title="Data do Contrato" required>
+                    </div>
+                </div>
+            </div> </div> </div> <div class="buttons">
         <button type="submit" class="btn-enviar">Confirmar Matrícula</button>
         <button type="reset" class="btn-limpar">Limpar Dados</button>
     </div>
@@ -249,5 +278,5 @@ AuthMiddleware::requireLogin();
 </form>
 
 <script src="resources/js/script.js"></script>
-</body>
-</html>
+
+<?php include 'resources/layout/footer.php'; ?>

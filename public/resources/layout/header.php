@@ -60,6 +60,27 @@ if (!isset($pagina_ativa)) {
                     <span class="menu-text">Funcionários</span>
                 </a>
             <?php } ?>
+                 <a href="aluno.php" class="menu-link <?php echo ($pagina_ativa == 'aluno') ? 'active' : ''; ?>">
+                    <i class="fa-solid fa-user-graduate"></i>
+                    <span class="menu-text">Aluno</span>
+            </a>
+             <?php if (($user['tipo'] ?? '') === 'admin') { ?>
+                 <a href="" class="menu-link <?php echo ($pagina_ativa == 'dashboard') ? 'active' : ''; ?>">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span class="menu-text">Dashboard</span>
+                </a>
+                <?php } ?>
+            <?php if (($user['tipo'] ?? '') === 'admin') { ?>
+                    <a href="" class="menu-link <?php echo ($pagina_ativa == 'cursos') ? 'active' : ''; ?>">
+                    <i class="fa-solid fa-book"></i>
+                    <span class="menu-text">Cursos</span>
+                </a>
+                <?php } ?>
+
+            <a href="" class="menu-link <?php echo ($pagina_ativa == 'pagamento') ? 'active' : ''; ?>">
+                    <i class="fa-solid fa-money-bill-wave"></i>
+                    <span class="menu-text">Pagamento</span>
+             </a>
         </nav>
 
         <div class="sidebar-footer">

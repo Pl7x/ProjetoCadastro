@@ -8,19 +8,16 @@ use App\Repositories\MatriculaRepository;
 
 class MatriculaController
 {
-    public static function save(): void
+    public static function save(): bool
     {
         AuthMiddleware::requireLogin();
         $user = AuthProvider::user();
 
         if ($user === null) {
             redirect('index.php');
+            return false;
         }
 
-        if (MatriculaRepository::save($_POST, (int) $user['id'])) {
-            redirect('painel.php');
-        }
-
-        echo 'Erro ao salvar matrícula.';
+        return MatriculaRepository::save($_POST, (int) $user['id']);
     }
 }

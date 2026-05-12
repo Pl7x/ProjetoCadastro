@@ -30,6 +30,18 @@ if ($queryUsuarios) {
 }
 ?>
 
+<?php if (isset($_GET['sucesso'])): ?>
+    <div class="alert-success">
+        Matrícula realizada com sucesso!
+    </div>
+<?php endif; ?>
+
+<?php if (isset($_GET['erro'])): ?>
+    <div class="alert-error">
+        Erro ao realizar matrícula.
+    </div>
+<?php endif; ?>
+
 
 <link rel="stylesheet" href="resources/css/style.css?v=<?php echo time(); ?>">
 

@@ -71,7 +71,7 @@ if (!isset($pagina_ativa)) {
                 </a>
                 <?php } ?>
             <?php if (($user['tipo'] ?? '') === 'admin') { ?>
-                    <a href="" class="menu-link <?php echo ($pagina_ativa == 'cursos') ? 'active' : ''; ?>">
+                    <a href="curso.php" class="menu-link <?php echo ($pagina_ativa == 'curso') ? 'active' : ''; ?>">
                     <i class="fa-solid fa-book"></i>
                     <span class="menu-text">Cursos</span>
                 </a>

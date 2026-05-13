@@ -3,12 +3,19 @@
 require_once __DIR__ . '/../../app/bootstrap.php';
 
 use App\Providers\DatabaseProvider;
-use App\Providers\AuthProvider;
 
 header('Content-Type: application/json');
 
 /* =========================================
-   VALIDA MÉTODO
+   ERROS PHP
+========================================= */
+
+ini_set('display_errors', 0);
+
+error_reporting(E_ALL);
+
+/* =========================================
+   MÉTODO
 ========================================= */
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -22,18 +29,10 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 /* =========================================
-   SESSÃO
-========================================= */
-
-AuthProvider::startSession();
-
-$id_logado = $_SESSION['id_usuario'] ?? null;
-
-/* =========================================
    DADOS
 ========================================= */
 
-$id_funcionario = $_POST['id_funcionario'] ?? null;
+$id_curso = $_POST['id_curso'] ?? null;
 
 $status = $_POST['status'] ?? null;
 
@@ -42,8 +41,8 @@ $status = $_POST['status'] ?? null;
 ========================================= */
 
 if (
-    !$id_funcionario ||
-    !in_array($status, ['ativo', 'inativo'])
+    empty($id_curso) ||
+    empty($status)
 ) {
 
     echo json_encode([
@@ -54,16 +53,11 @@ if (
     exit;
 }
 
-/* =========================================
-   BLOQUEIA PRÓPRIO STATUS
-========================================= */
-
-if ($id_funcionario == $id_logado) {
+if (!in_array($status, ['ativo', 'inativo'])) {
 
     echo json_encode([
         'success' => false,
-        'message' =>
-            'Ação bloqueada: Você não pode alterar o seu próprio status!'
+        'message' => 'Status inválido'
     ]);
 
     exit;
@@ -74,41 +68,42 @@ try {
     $conn = DatabaseProvider::connect();
 
     /* =====================================
-       BUSCA STATUS ATUAL
+       BUSCA CURSO
     ===================================== */
 
-    $stmtBusca = $conn->prepare(
-        "SELECT status FROM usuario WHERE id = ?"
-    );
+    $stmt = $conn->prepare("
+        SELECT status
+        FROM curso
+        WHERE id = ?
+    ");
 
-    $stmtBusca->bind_param("i", $id_funcionario);
+    $stmt->bind_param("i", $id_curso);
 
-    $stmtBusca->execute();
+    $stmt->execute();
 
-    $resultado = $stmtBusca->get_result();
+    $result = $stmt->get_result();
 
-    if ($resultado->num_rows <= 0) {
+    if ($result->num_rows <= 0) {
 
         echo json_encode([
             'success' => false,
-            'message' => 'Funcionário não encontrado.'
+            'message' => 'Curso não encontrado'
         ]);
 
         exit;
     }
 
-    $funcionario = $resultado->fetch_assoc();
+    $curso = $result->fetch_assoc();
 
     /* =====================================
-       BLOQUEIA STATUS IGUAL
+       STATUS REPETIDO
     ===================================== */
 
-    if ($funcionario['status'] === $status) {
+    if ($curso['status'] === $status) {
 
         echo json_encode([
             'success' => false,
-            'message' =>
-                'O funcionário já está com esse status.'
+            'message' => 'O curso já está com este status'
         ]);
 
         exit;
@@ -118,38 +113,37 @@ try {
        UPDATE
     ===================================== */
 
-    $stmt = $conn->prepare(
-        "UPDATE usuario SET status = ? WHERE id = ?"
-    );
+    $update = $conn->prepare("
+        UPDATE curso
+        SET status = ?
+        WHERE id = ?
+    ");
 
-    $stmt->bind_param(
+    $update->bind_param(
         "si",
         $status,
-        $id_funcionario
+        $id_curso
     );
 
-    if ($stmt->execute()) {
+    if ($update->execute()) {
 
         echo json_encode([
             'success' => true,
-            'message' =>
-                'Status atualizado com sucesso!'
+            'message' => 'Status atualizado com sucesso!'
         ]);
 
     } else {
 
         echo json_encode([
             'success' => false,
-            'message' =>
-                'Erro ao atualizar.'
+            'message' => 'Erro ao atualizar status'
         ]);
     }
 
-} catch (Exception $e) {
+} catch (Throwable $e) {
 
     echo json_encode([
         'success' => false,
-        'message' =>
-            'Erro interno: ' . $e->getMessage()
+        'message' => $e->getMessage()
     ]);
 }

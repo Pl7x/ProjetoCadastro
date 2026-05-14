@@ -515,7 +515,9 @@ function mostrarMensagem(tipo,texto){
     `;
 }
 
-form.addEventListener("submit", async e => {
+if(form){
+
+    form.addEventListener("submit", async e => {
 
     e.preventDefault();
 
@@ -614,3 +616,6 @@ window.addEventListener("click",e=>{
         fecharModalStatusCurso();
     }
 });
+}
+
+

@@ -162,6 +162,7 @@ try {
 
                         <input type="date"
                                name="data_nasc_aluno"
+                               id="data_nasc_aluno"
                                style="flex: 1;"
                                title="Data de Nascimento"
                                required>
@@ -247,7 +248,7 @@ try {
                             style="flex: 1.5;"
                             required>
 
-                        <option value="" disabled selected>
+                        <option value="" disabled selected >
                             Estado Civil
                         </option>
 
@@ -285,10 +286,17 @@ try {
 
             </div>
 
+            <div class="linha" style="margin-bottom: 15px;">
+                <label style="display: flex; align-items: center; gap: 10px; font-weight: 600; cursor: pointer;">
+                    <input type="checkbox" id="alunoResponsavel">
+                    O aluno é o próprio responsável financeiro
+                </label>
+            </div>
+
             <!-- =====================================================
                  RESPONSÁVEL FINANCEIRO
             ====================================================== -->
-            <div class="sessao">
+            <div class="sessao" id="sessaoResponsavel">
 
                 <h3 class="titulo-sessao">
                     Responsável Financeiro
@@ -298,9 +306,9 @@ try {
 
                     <input type="text"
                            name="nome_responsavel"
+                           class="campo-responsavel"
                            placeholder="Nome Completo:"
-                           style="flex: 1;"
-                           required>
+                           style="flex: 1;">
 
                 </div>
 
@@ -308,9 +316,9 @@ try {
 
                     <input type="text"
                            name="endereco_responsavel"
+                           class="campo-responsavel"
                            placeholder="Endereço:"
-                           style="flex: 3;"
-                           required>
+                           style="flex: 3;">
 
                     <input type="text"
                            name="complemento_responsavel"
@@ -323,15 +331,15 @@ try {
 
                     <input type="text"
                            name="cidade_responsavel"
+                           class="campo-responsavel"
                            placeholder="Cidade:"
-                           style="flex: 2;"
-                           required>
+                           style="flex: 2;">
 
                     <input type="text"
                            name="bairro_responsavel"
+                           class="campo-responsavel"
                            placeholder="Bairro:"
-                           style="flex: 2;"
-                           required>
+                           style="flex: 2;">
 
                     <input type="text"
                            name="cep_responsavel"
@@ -353,9 +361,9 @@ try {
 
                         <input type="date"
                                name="data_nasc_responsavel"
+                               class="campo-responsavel"
                                style="flex: 1;"
-                               title="Data de Nascimento"
-                               required>
+                               title="Data de Nascimento">
 
                     </div>
 
@@ -375,11 +383,11 @@ try {
 
                     <input type="text"
                            name="tel_residencial"
+                           class="campo-responsavel"
                            placeholder="Telefone Residencial:"
                            style="flex: 1.5;"
                            maxlength="15"
-                           oninput="mascaraTelefone(this)"
-                           required>
+                           oninput="mascaraTelefone(this)">
 
                 </div>
 
@@ -387,9 +395,9 @@ try {
 
                     <input type="text"
                            name="escolaridade_responsavel"
+                           class="campo-responsavel"
                            placeholder="Escolaridade:"
-                           style="flex: 2;"
-                           required>
+                           style="flex: 2;">
 
                     <div class="opcoes-inline" style="flex: 1.5;">
 
@@ -399,7 +407,7 @@ try {
                             <input type="radio"
                                    name="sexo_responsavel"
                                    value="M"
-                                   required> M
+                                   class="campo-responsavel-radio"> M
                         </label>
 
                         <label>
@@ -412,11 +420,11 @@ try {
 
                     <input type="text"
                            name="rg_responsavel"
+                           class="campo-responsavel"
                            placeholder="RG:"
                            style="flex: 1.5;"
                            maxlength="12"
-                           oninput="mascaraRG(this)"
-                           required>
+                           oninput="mascaraRG(this)">
 
                     <input type="text"
                            name="tel_comercial_responsavel"
@@ -432,15 +440,15 @@ try {
                     <input type="text"
                            name="cpf_cnpj_responsavel"
                            id="campoCpfCnpj"
+                           class="campo-responsavel"
                            placeholder="CPF/CNPJ:"
                            style="flex: 2;"
                            maxlength="18"
-                           oninput="mascaraDinamica(this)"
-                           required>
+                           oninput="mascaraDinamica(this)">
 
                     <select name="estado_civil_responsavel"
-                            style="flex: 1.5;"
-                            required>
+                            class="campo-responsavel"
+                            style="flex: 1.5;">
 
                         <option value="" disabled selected>
                             Estado Civil
@@ -485,17 +493,16 @@ try {
 
                         <label>
                             <input type="radio"
-                            name="tipo_pessoa"
-                            value="Fisica"
-                            id="radioFisica"
-                            required> Física
+                                   name="Pessoa"
+                                   value="Fisica"
+                                   id="radioFisica"> Física
                         </label>
 
                         <label>
                             <input type="radio"
-                            name="tipo_pessoa"
-                            value="Juridica"
-                            id="radioJuridica"> Jurídica
+                                   name="Pessoa"
+                                   value="Juridica"
+                                   id="radioJuridica"> Jurídica
                         </label>
 
                     </div>
@@ -786,15 +793,6 @@ try {
 
                 </div>
 
-                <div class="linha">
-
-                    <input type="text"
-                           name="assinatura_primeira_aula"
-                           placeholder="Assinatura Primeira Aula (Opcional):"
-                           style="flex: 1;">
-
-                </div>
-
                 <div class="linha alinha-topo"
                      style="margin-top: 15px;">
 
@@ -855,6 +853,7 @@ try {
 
         </button>
 
+
         <button type="reset"
                 class="btn-limpar">
 
@@ -867,5 +866,28 @@ try {
 </form>
 
 <script src="resources/js/script.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const checkbox = document.getElementById("alunoResponsavel");
+    const sessaoResponsavel = document.getElementById("sessaoResponsavel");
+
+    checkbox.addEventListener("change", function () {
+
+        if (this.checked) {
+
+            sessaoResponsavel.style.display = "none";
+
+        } else {
+
+            sessaoResponsavel.style.display = "block";
+
+        }
+
+    });
+
+});
+</script>
 
 <?php include 'resources/layout/footer.php'; ?>

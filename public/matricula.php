@@ -15,9 +15,6 @@ try {
 
     $conn = DatabaseProvider::connect();
 
-    // =========================================
-    // USUÁRIOS ATIVOS
-    // =========================================
     $queryUsuarios = $conn->query("
         SELECT id, nome 
         FROM usuario 
@@ -796,11 +793,11 @@ try {
                 <div class="linha alinha-topo"
                      style="margin-top: 15px;">
 
-                    <div class="bloco-label" style="flex: 2;">
+                   <div class="bloco-label" style="flex: 2;">
 
                         <label>Contratante</label>
 
-                        <select name="contratante_id" required>
+                        <select name="id_usuario" required>
 
                             <option value=""
                                     disabled

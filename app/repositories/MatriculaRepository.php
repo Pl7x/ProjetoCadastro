@@ -78,10 +78,6 @@ class MatriculaRepository
                 $data['Pessoa'] = 'Fisica';
             }
 
-            // =====================================
-            // FUNÇÃO MOEDA
-            // =====================================
-
             function moeda($valor)
             {
                 if (empty($valor)) {
@@ -89,19 +85,12 @@ class MatriculaRepository
                 }
 
                 $valor = str_replace('R$', '', $valor);
-
                 $valor = trim($valor);
-
                 $valor = str_replace('.', '', $valor);
-
                 $valor = str_replace(',', '.', $valor);
 
                 return (float)$valor;
             }
-
-            // =====================================
-            // CONVERTER DATA
-            // =====================================
 
             function converterData($data)
             {
@@ -124,25 +113,13 @@ class MatriculaRepository
                 return $data;
             }
 
-            // =====================================
-            // DIAS DA SEMANA
-            // =====================================
-
             $diasSemana = isset($data['dias']) && is_array($data['dias'])
                 ? implode(',', $data['dias'])
                 : null;
 
-            // =====================================
-            // TIPO PESSOA
-            // =====================================
-
             $tipoPessoa = !empty($data['Pessoa'])
                 ? $data['Pessoa']
                 : 'Fisica';
-
-            // =====================================
-            // VERIFICA ALUNO EXISTENTE
-            // =====================================
 
             $stmtBuscaAluno = $db->prepare("
                 SELECT id
@@ -160,21 +137,13 @@ class MatriculaRepository
 
             $resultAluno = $stmtBuscaAluno->get_result();
 
-            // =====================================
-            // ALUNO EXISTENTE
-            // =====================================
-
             if ($resultAluno->num_rows > 0) {
 
-                $alunoExistente = $resultAluno->fetch_assoc();
-
-                $idAluno = $alunoExistente['id'];
+                throw new \Exception(
+                    "Já existe um aluno cadastrado com este CPF."
+                );
 
             } else {
-
-                // =====================================
-                // SALVA ALUNO
-                // =====================================
 
                 $stmtAluno = $db->prepare("
                     INSERT INTO aluno (
@@ -228,7 +197,6 @@ class MatriculaRepository
                 );
 
                 if (!$stmtAluno->execute()) {
-
                     throw new \Exception(
                         "Erro ao salvar aluno: " .
                         $stmtAluno->error
@@ -237,10 +205,6 @@ class MatriculaRepository
 
                 $idAluno = $db->insert_id;
             }
-
-            // =====================================
-            // RESPONSÁVEL
-            // =====================================
 
             $idResponsavel = null;
 
@@ -329,7 +293,6 @@ class MatriculaRepository
                     );
 
                     if (!$stmtResp->execute()) {
-
                         throw new \Exception(
                             "Erro ao salvar responsável: " .
                             $stmtResp->error
@@ -340,10 +303,6 @@ class MatriculaRepository
                 }
             }
 
-            // =====================================
-            // VALORES
-            // =====================================
-
             $taxaMatricula =
                 moeda($data['taxa_matricula'] ?? '');
 
@@ -353,16 +312,8 @@ class MatriculaRepository
             $valorParcela =
                 moeda($data['valor_parcela'] ?? '');
 
-            // =====================================
-            // DATA CONTRATO
-            // =====================================
-
             $dataContrato =
                 converterData($data['data_contrato']);
-
-            // =====================================
-            // MATRÍCULA
-            // =====================================
 
             $stmtMatricula = $db->prepare("
                 INSERT INTO matricula (
@@ -401,12 +352,16 @@ class MatriculaRepository
             $vencimento =
                 (int)$data['vencimento'];
 
+            $idUsuarioMatricula = !empty($data['id_usuario'])
+                ? $data['id_usuario']
+                : $userId;
+
             $stmtMatricula->bind_param(
                 "iiiidddissssssssssss",
                 $idAluno,
                 $idResponsavel,
                 $data['id_curso'],
-                $userId,
+                $idUsuarioMatricula,
                 $taxaMatricula,
                 $taxaMaterial,
                 $valorParcela,
@@ -426,7 +381,6 @@ class MatriculaRepository
             );
 
             if (!$stmtMatricula->execute()) {
-
                 throw new \Exception(
                     "Erro ao salvar matrícula: " .
                     $stmtMatricula->error
@@ -434,10 +388,6 @@ class MatriculaRepository
             }
 
             $idMatricula = $db->insert_id;
-
-            // =====================================
-            // GERA PARCELAS
-            // =====================================
 
             if (
                 !empty($data['num_parcelas']) &&
@@ -454,11 +404,7 @@ class MatriculaRepository
                     $dataContrato
                 );
 
-                for (
-                    $i = 1;
-                    $i <= $quantidadeParcelas;
-                    $i++
-                ) {
+                for ($i = 1; $i <= $quantidadeParcelas; $i++) {
 
                     $dataParcela = clone $dataBase;
 
@@ -466,11 +412,8 @@ class MatriculaRepository
                         '+' . ($i - 1) . ' month'
                     );
 
-                    $ano =
-                        $dataParcela->format('Y');
-
-                    $mes =
-                        $dataParcela->format('m');
+                    $ano = $dataParcela->format('Y');
+                    $mes = $dataParcela->format('m');
 
                     $ultimoDiaMes =
                         cal_days_in_month(
@@ -481,13 +424,8 @@ class MatriculaRepository
 
                     $diaParcela = $diaVencimento;
 
-                    if (
-                        $diaParcela >
-                        $ultimoDiaMes
-                    ) {
-
-                        $diaParcela =
-                            $ultimoDiaMes;
+                    if ($diaParcela > $ultimoDiaMes) {
+                        $diaParcela = $ultimoDiaMes;
                     }
 
                     $vencimentoParcela =
@@ -525,7 +463,6 @@ class MatriculaRepository
                     );
 
                     if (!$stmtParcela->execute()) {
-
                         throw new \Exception(
                             "Erro ao gerar parcelas: " .
                             $stmtParcela->error
@@ -533,10 +470,6 @@ class MatriculaRepository
                     }
                 }
             }
-
-            // =====================================
-            // COMMIT
-            // =====================================
 
             $db->commit();
 

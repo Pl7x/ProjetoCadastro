@@ -3,7 +3,7 @@ return [
     'database' => [
         'host' => 'localhost',
         'user' => 'root',
-        'password' => 'Pedrolucas05.',
+        'password' => '',
         'name' => 'escola',
     ],
 ];

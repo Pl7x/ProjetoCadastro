@@ -16,6 +16,7 @@ if (AuthProvider::check()) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Sistema Escolar</title>
+    <link rel="shortcut icon" href="img/logo_login.png" type="image/x-icon">
     <link rel="stylesheet" href="resources/css/login.css?v=<?php echo time(); ?>">
 </head>
 

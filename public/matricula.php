@@ -56,20 +56,18 @@ try {
 }
 ?>
 
-<?php if (isset($_GET['sucesso'])): ?>
-
+<?php if (isset($_SESSION['success'])): ?>
     <div class="alert-success">
-        Matrícula realizada com sucesso!
+        <?= $_SESSION['success']; ?>
     </div>
-
+    <?php unset($_SESSION['success']); ?>
 <?php endif; ?>
 
-<?php if (isset($_GET['erro'])): ?>
-
+<?php if (isset($_SESSION['error'])): ?>
     <div class="alert-error">
-        Erro ao realizar matrícula.
+        <?= $_SESSION['error']; ?>
     </div>
-
+    <?php unset($_SESSION['error']); ?>
 <?php endif; ?>
 
 <link rel="stylesheet" href="resources/css/style.css?v=<?php echo time(); ?>">
@@ -185,7 +183,7 @@ try {
                            style="flex: 2;">
 
                     <input type="text"
-                           name="whatsapp_aluno"
+                           name="whatsapp"
                            placeholder="Whatsapp:"
                            style="flex: 1.5;"
                            maxlength="15"
@@ -487,14 +485,17 @@ try {
 
                         <label>
                             <input type="radio"
-                                   name="Pessoa"
-                                   id="radioFisica"> Física
+                            name="tipo_pessoa"
+                            value="Fisica"
+                            id="radioFisica"
+                            required> Física
                         </label>
 
                         <label>
                             <input type="radio"
-                                   name="Pessoa"
-                                   id="radioJuridica"> Jurídica
+                            name="tipo_pessoa"
+                            value="Juridica"
+                            id="radioJuridica"> Jurídica
                         </label>
 
                     </div>
@@ -605,7 +606,7 @@ try {
 
                         <label>Curso</label>
 
-                        <select name="curso_id" required>
+                        <select name="id_curso" required>
 
                             <option value="" disabled selected>
                                 Selecione o curso
@@ -747,37 +748,37 @@ try {
 
                         <label>
                             <input type="checkbox"
-                                   name="dias"
+                                   name="dias[]"
                                    value="Seg"> Seg
                         </label>
 
                         <label>
                             <input type="checkbox"
-                                   name="dias"
+                                   name="dias[]"
                                    value="Ter"> Ter
                         </label>
 
                         <label>
                             <input type="checkbox"
-                                   name="dias"
+                                   name="dias[]"
                                    value="Qua"> Qua
                         </label>
 
                         <label>
                             <input type="checkbox"
-                                   name="dias"
+                                   name="dias[]"
                                    value="Qui"> Qui
                         </label>
 
                         <label>
                             <input type="checkbox"
-                                   name="dias"
+                                   name="dias[]"
                                    value="Sex"> Sex
                         </label>
 
                         <label>
                             <input type="checkbox"
-                                   name="dias"
+                                   name="dias[]"
                                    value="Sab"> Sab
                         </label>
 

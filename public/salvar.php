@@ -1,15 +1,19 @@
 <?php
+session_start();
 
 require_once __DIR__ . '/../app/bootstrap.php';
 
-use App\Controllers\MatriculaController;
+use App\Repositories\MatriculaRepository;
+use App\Providers\AuthProvider;
 
-$resultado = MatriculaController::save();
+$user = AuthProvider::user();
 
-if ($resultado) {
-    header("Location: matricula.php?sucesso=1");
-} else {
-    header("Location: matricula.php?erro=1");
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    if (MatriculaRepository::save($_POST, $user['id'])) {
+        $_SESSION['success'] = 'Matrícula realizada com sucesso!';
+    }
+
+    header('Location: matricula.php');
+    exit;
 }
-
-exit;

@@ -332,20 +332,20 @@
 }
 
 
-.alert-success {
-    background: #d4edda;
-    color: #155724;
+.alert-success,
+.alert-error {
     padding: 15px;
     border-radius: 8px;
     margin-bottom: 20px;
     font-weight: bold;
 }
 
+.alert-success {
+    background: #d4edda;
+    color: #155724;
+}
+
 .alert-error {
     background: #f8d7da;
     color: #721c24;
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    font-weight: bold;
 }
